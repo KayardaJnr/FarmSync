@@ -10,7 +10,7 @@ import ExpenseProfitTrackingPage from '../pages/ExpenseProfitTracking/ExpensePro
 import SalesDistributionPage from '../pages/SalesDistribution/SalesDistribution';
 import AnalyticsDashboardPage from '../pages/AnalyticsDashboard/AnalyticsDashboard';
 import NotificationsAlertsPage from '../Pages/NotificationsAlerts/NotificationsAlerts';
-import ReportsPage from './pages/Reports/Reports';
+import ReportsPage from '../pages/Reports/Reports';
 
 
 const AppRoutes = ({ data, db, userId }) => {

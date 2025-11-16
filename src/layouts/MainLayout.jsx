@@ -1,7 +1,9 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Sidebar from '../../components/common/Sidebar/Sidebar';
-import TopBar from '../../components/common/TopBar/TopBar';
+// import Sidebar from '../../components/common/Sidebar/Sidebar';
+import Sidebar from "../../components/common/Sidebar/Sidebar.jsx";
+
+import TopBar from '../../components/common/TopBar/TopBar.jsx';
 import styles from './MainLayout.module.css';
 
 const MainLayout = ({ 

@@ -28,6 +28,7 @@ const menuItems = [
   { label: 'Expense & Profit', icon: DollarSign, path: '/expense-profit' },
   { label: 'Sales & Distribution', icon: ShoppingCart, path: '/sales-distribution' },
   { label: 'Analytics', icon: BarChart3, path: '/analytics' },
+  // eslint-disable-next-line no-undef
   { label: 'Reports', icon: FileText, path: '/reports' }, 
   { label: 'Notifications', icon: Bell, path: '/notifications' },
 ];
