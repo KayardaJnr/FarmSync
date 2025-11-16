@@ -1,0 +1,94 @@
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid #E5E7EB;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 14px;
+  color: #6B7280;
+  margin-bottom: 8px;
+}
+
+.value {
+  font-weight: bold;
+  font-size: 30px;
+  color: #1F2937;
+}
+
+.small .title {
+  margin-bottom: 4px;
+}
+
+.small .value {
+  font-size: 24px;
+}
+
+.iconWrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Color variants for borders */
+.blue {
+  border-color: #DBEAFE;
+}
+
+.green {
+  border-color: #D1FAE5;
+}
+
+.yellow {
+  border-color: #FEF3C7;
+}
+
+.red {
+  border-color: #FEE2E2;
+}
+
+.purple {
+  border-color: #F3E8FF;
+}
+
+/* Icon color variants */
+.icon_blue {
+  background-color: #DBEAFE;
+  color: #1E40AF;
+}
+
+.icon_green {
+  background-color: #D1FAE5;
+  color: #065F46;
+}
+
+.icon_yellow {
+  background-color: #FEF3C7;
+  color: #92400E;
+}
+
+.icon_red {
+  background-color: #FEE2E2;
+  color: #991B1B;
+}
+
+.icon_purple {
+  background-color: #F3E8FF;
+  color: #7C3AED;
+}
+
+.icon_gray {
+  background-color: #F3F4F6;
+  color: #6B7280;
+}

@@ -1,0 +1,135 @@
+.sidebar {
+  width: 256px;
+  background-color: #1D9E53;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-shrink: 0;
+  transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.header {
+  padding: 16px;
+  height: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar.collapsed .header {
+  justify-content: center;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+}
+
+.logoText {
+  font-size: 28px;
+  font-weight: bold;
+  display: block;
+}
+
+.logoSubtext {
+  font-size: 11px;
+  opacity: 0.9;
+}
+
+.toggleButton {
+  padding: 8px;
+  border-radius: 8px;
+  color: white;
+  background: none;
+  transition: background-color 0.2s;
+}
+
+.toggleButton:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav {
+  flex: 1;
+  padding: 16px;
+  padding-top: 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.navItem {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  transition: all 0.2s;
+  color: white;
+  background: none;
+  text-align: left;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.navItem.collapsed {
+  justify-content: center;
+}
+
+.navItem:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.navItem.active {
+  background-color: white;
+  color: #1D9E53;
+  font-weight: bold;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.navLabel {
+  font-size: 14px;
+}
+
+.badge {
+  margin-left: auto;
+  background-color: #EF4444;
+  color: white;
+  font-size: 12px;
+  border-radius: 9999px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.badgeCollapsed {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background-color: #EF4444;
+  color: white;
+  font-size: 10px;
+  border-radius: 9999px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.logout {
+  margin-top: auto;
+}

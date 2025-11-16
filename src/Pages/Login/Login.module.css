@@ -1,0 +1,162 @@
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #F9FAFB;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 448px;
+  padding: 32px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #E5E7EB;
+  padding: 32px;
+}
+
+.logoSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.logo {
+  font-size: 36px;
+  font-weight: bold;
+  color: #1D9E53;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #1F2937;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.subtitle {
+  color: #9CA3AF;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.forgotPassword {
+  text-align: right;
+  margin-top: 8px;
+}
+
+.forgotPassword button {
+  font-size: 14px;
+  color: #1D9E53;
+  font-weight: 600;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.forgotPassword button:hover {
+  color: #178F48;
+}
+
+.submitButton {
+  width: 100%;
+  background-color: #1D9E53;
+  color: white;
+  font-weight: 600;
+  padding: 14px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #178F48;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.submitButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #1D9E53;
+}
+
+.submitButton:disabled {
+  background-color: #9CA3AF;
+  cursor: not-allowed;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 24px 0;
+}
+
+.dividerLine {
+  flex-grow: 1;
+  border-top: 1px solid #D1D5DB;
+}
+
+.dividerText {
+  margin: 0 16px;
+  color: #9CA3AF;
+  font-size: 14px;
+}
+
+.googleButton {
+  width: 100%;
+  background-color: white;
+  border: 1px solid #D1D5DB;
+  color: #374151;
+  font-weight: 600;
+  padding: 14px;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.googleButton:hover:not(:disabled) {
+  background-color: #F9FAFB;
+}
+
+.googleIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.switchMode {
+  margin-top: 32px;
+  text-align: center;
+  color: #6B7280;
+}
+
+.switchMode button {
+  color: #1D9E53;
+  font-weight: 600;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.switchMode button:hover:not(:disabled) {
+  color: #178F48;
+}

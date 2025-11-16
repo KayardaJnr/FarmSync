@@ -1,0 +1,111 @@
+.container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #1F2937;
+  margin-bottom: 32px;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid #E5E7EB;
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1F2937;
+  margin-bottom: 16px;
+}
+
+.batchList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.batchItem {
+  padding: 16px;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.batchId {
+  font-weight: bold;
+  font-size: 18px;
+  color: #1F2937;
+}
+
+.batchBreed {
+  margin-left: 8px;
+  font-size: 14px;
+  color: #6B7280;
+}
+
+.stats {
+  display: flex;
+  gap: 24px;
+  text-align: center;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.statLabel {
+  font-size: 14px;
+  color: #9CA3AF;
+}
+
+.statValue {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1F2937;
+}
+
+.statValue.excellent {
+  color: #10B981;
+}
+
+.statValue.good {
+  color: #FFBB28;
+}
+
+.detailsButton {
+  padding: 8px 16px;
+  background-color: #F3F4F6;
+  color: #374151;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.detailsButton:hover {
+  background-color: #E5E7EB;
+}
+
+.emptyText {
+  text-align: center;
+  color: #9CA3AF;
+  padding: 40px;
+}

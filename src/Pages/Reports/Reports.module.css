@@ -1,0 +1,277 @@
+.container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px;
+  background-color: #F9FAFB;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #1F2937;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #6B7280;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.actionButton {
+  padding: 10px 20px;
+  background-color: #1D9E53;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.actionButton:hover {
+  background-color: #178F48;
+}
+
+.controls {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.reportTypes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.reportType {
+  padding: 16px;
+  background-color: #F9FAFB;
+  border: 2px solid #E5E7EB;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+  color: #6B7280;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.reportType:hover {
+  background-color: #F3F4F6;
+  border-color: #D1D5DB;
+}
+
+.reportType.active {
+  background-color: #D1FAE5;
+  border-color: #1D9E53;
+  color: #1D9E53;
+}
+
+.dateFilters {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid #E5E7EB;
+}
+
+.datePickerWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.reportContainer {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.reportContent {
+  padding: 40px;
+}
+
+.reportHeader {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid #E5E7EB;
+}
+
+.reportTitle {
+  font-size: 28px;
+  font-weight: bold;
+  color: #1F2937;
+  margin-bottom: 8px;
+}
+
+.reportDate {
+  font-size: 14px;
+  color: #6B7280;
+}
+
+.section {
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 16px;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.metric {
+  padding: 20px;
+  background-color: #F9FAFB;
+  border-radius: 8px;
+  border: 1px solid #E5E7EB;
+  display: flex;
+  flex-direction: column;
+}
+
+.metricLabel {
+  font-size: 14px;
+  color: #6B7280;
+  margin-bottom: 8px;
+}
+
+.metricValue {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1F2937;
+}
+
+.metricValue.positive {
+  color: #10B981;
+}
+
+.metricValue.negative {
+  color: #EF4444;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.table thead tr {
+  background-color: #F9FAFB;
+  border-bottom: 2px solid #E5E7EB;
+}
+
+.table th {
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.table td {
+  padding: 12px;
+  font-size: 14px;
+  color: #6B7280;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+.table tbody tr:hover {
+  background-color: #F9FAFB;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge.excellent {
+  background-color: #D1FAE5;
+  color: #065F46;
+}
+
+.badge.good {
+  background-color: #FEF3C7;
+  color: #92400E;
+}
+
+.badge.ok {
+  background-color: #D1FAE5;
+  color: #065F46;
+}
+
+.badge.low {
+  background-color: #FEE2E2;
+  color: #991B1B;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.emptyIcon {
+  color: #D1D5DB;
+  margin-bottom: 16px;
+}
+
+.emptyTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.emptyText {
+  font-size: 14px;
+  color: #9CA3AF;
+  max-width: 400px;
+}
+
+@media print {
+  .header,
+  .controls,
+  .actions {
+    display: none;
+  }
+
+  .reportContainer {
+    box-shadow: none;
+  }
+}

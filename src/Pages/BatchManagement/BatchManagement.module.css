@@ -1,0 +1,253 @@
+.container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #1F2937;
+}
+
+.addButton {
+  padding: 10px 20px;
+  background-color: #1D9E53;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.addButton:hover {
+  background-color: #178F48;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.batchList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.batchCard {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid #E5E7EB;
+  overflow: hidden;
+}
+
+.batchHeader {
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.batchInfo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.batchIcon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #10B981, #1D9E53);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.batchBreed {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1F2937;
+}
+
+.batchDate {
+  font-size: 14px;
+  color: #6B7280;
+}
+
+.status {
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.status.active {
+  background-color: #D1FAE5;
+  color: #065F46;
+}
+
+.status.inactive {
+  background-color: #F3F4F6;
+  color: #374151;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 0 24px 16px;
+}
+
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stat {
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.stat.blue {
+  background-color: #DBEAFE;
+  border-color: #93C5FD;
+}
+
+.stat.red {
+  background-color: #FEE2E2;
+  border-color: #FCA5A5;
+}
+
+.stat.green {
+  background-color: #D1FAE5;
+  border-color: #6EE7B7;
+}
+
+.stat.yellow {
+  background-color: #FEF3C7;
+  border-color: #FCD34D;
+}
+
+.statHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.stat.blue .statHeader {
+  color: #1E40AF;
+}
+
+.stat.red .statHeader {
+  color: #991B1B;
+}
+
+.stat.green .statHeader {
+  color: #065F46;
+}
+
+.stat.yellow .statHeader {
+  color: #92400E;
+}
+
+.statLabel {
+  font-size: 14px;
+  color: #6B7280;
+}
+
+.statValue {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.stat.blue .statValue {
+  color: #1E3A8A;
+}
+
+.stat.red .statValue {
+  color: #7F1D1D;
+}
+
+.stat.green .statValue {
+  color: #064E3B;
+}
+
+.stat.yellow .statValue {
+  color: #78350F;
+}
+
+.progressSection {
+  background-color: #F9FAFB;
+  padding: 16px 24px;
+  border-top: 1px solid #E5E7EB;
+}
+
+.progressBar {
+  width: 100%;
+  background-color: #E5E7EB;
+  border-radius: 9999px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.progressFill {
+  background-color: #1D9E53;
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s;
+}
+
+.progressText {
+  font-size: 12px;
+  color: #6B7280;
+  text-align: right;
+  margin-top: 4px;
+}
+
+.emptyText {
+  text-align: center;
+  color: #9CA3AF;
+  padding: 40px;
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.saveButton {
+  width: 100%;
+  margin-top: 16px;
+  padding: 12px 24px;
+  background-color: #1D9E53;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.saveButton:hover {
+  background-color: #178F48;
+}

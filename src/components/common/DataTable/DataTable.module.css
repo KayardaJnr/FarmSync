@@ -1,0 +1,41 @@
+.container {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid #E5E7EB;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+}
+
+.headerRow {
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.headerCell {
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6B7280;
+  padding: 16px;
+}
+
+.bodyRow {
+  border-bottom: 1px solid #E5E7EB;
+  transition: background-color 0.2s;
+}
+
+.bodyRow:hover {
+  background-color: #F9FAFB;
+}
+
+.bodyCell {
+  padding: 16px;
+  font-size: 14px;
+  color: #1F2937;
+}

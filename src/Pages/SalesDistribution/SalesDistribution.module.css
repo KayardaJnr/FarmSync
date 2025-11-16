@@ -1,0 +1,62 @@
+.container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #1F2937;
+}
+
+.addButton {
+  padding: 10px 20px;
+  background-color: #1D9E53;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.addButton:hover {
+  background-color: #178F48;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.saveButton {
+  width: 100%;
+  margin-top: 16px;
+  padding: 12px 24px;
+  background-color: #1D9E53;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.saveButton:hover {
+  background-color: #178F48;
+}

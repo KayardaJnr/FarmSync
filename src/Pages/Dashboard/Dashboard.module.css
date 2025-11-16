@@ -1,0 +1,226 @@
+.container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #1F2937;
+  margin-bottom: 32px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.leftColumn, .rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid #E5E7EB;
+}
+
+.chartCard {
+  height: 384px;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 16px;
+}
+
+.actionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.actionButton {
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 8px;
+  text-align: left;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.actionButton.green {
+  background-color: #D1FAE5;
+  color: #065F46;
+}
+
+.actionButton.green:hover {
+  background-color: #A7F3D0;
+}
+
+.actionButton.blue {
+  background-color: #DBEAFE;
+  color: #1E40AF;
+}
+
+.actionButton.blue:hover {
+  background-color: #BFDBFE;
+}
+
+.actionButton.purple {
+  background-color: #F3E8FF;
+  color: #7C3AED;
+}
+
+.actionButton.purple:hover {
+  background-color: #E9D5FF;
+}
+
+.actionButton.red {
+  background-color: #FEE2E2;
+  color: #991B1B;
+}
+
+.actionButton.red:hover {
+  background-color: #FECACA;
+}
+
+.batchList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.batchItem {
+  padding: 12px;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.batchId {
+  font-weight: bold;
+  color: #1F2937;
+}
+
+.batchBreed {
+  margin-left: 8px;
+  font-size: 14px;
+  color: #6B7280;
+}
+
+.health {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.health.excellent {
+  color: #10B981;
+}
+
+.health.good {
+  color: #FFBB28;
+}
+
+.alertsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.alert {
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-left: 4px solid;
+}
+
+.alert.critical {
+  background-color: #FEE2E2;
+  border-color: #EF4444;
+}
+
+.alert.warning {
+  background-color: #FEF3C7;
+  border-color: #FFBB28;
+}
+
+.alert.info {
+  background-color: #DBEAFE;
+  border-color: #3B82F6;
+}
+
+.alertIcon {
+  margin-top: 2px;
+}
+
+.alert.critical .alertIcon {
+  color: #991B1B;
+}
+
+.alert.warning .alertIcon {
+  color: #92400E;
+}
+
+.alert.info .alertIcon {
+  color: #1E40AF;
+}
+
+.alertTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1F2937;
+}
+
+.alertMessage {
+  font-size: 14px;
+  color: #6B7280;
+}
+
+.alertTime {
+  font-size: 12px;
+  color: #9CA3AF;
+  margin-top: 4px;
+}
+
+.emptyText {
+  color: #9CA3AF;
+  font-size: 14px;
+  text-align: center;
+}
+
+.emptyChart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #9CA3AF;
+}
