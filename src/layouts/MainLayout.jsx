@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Sidebar from '../components/common/Sidebar/Sidebar';
+import Sidebar from '../components/common/Sidebar/Sidebar.jsx';
 import TopBar from '../components/common/TopBar/TopBar';
 import styles from './MainLayout.module.css';
 
@@ -22,7 +22,7 @@ const MainLayout = ({
         onLogout={onLogout}
       />
       <div className={styles.mainContent}>
-        <TopBar user={user} unreadCount={unreadCount} />
+        <TopBar user={user} unreadCount={unreadCount} onLogout={onLogout} />
         <div className={styles.content}>
           <Outlet />
         </div>
