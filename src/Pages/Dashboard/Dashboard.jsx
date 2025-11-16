@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bird, Package, HeartPulse, DollarSign, PlusCircle, Search, AlertCircle, AlertTriangle, Info } from 'lucide-react';
+import { Bird, Package, HeartPulse, DollarSign, PlusCircle, Search, AlertCircle, AlertTriangle, Info, Skull } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import StatCard from '../../components/common/StatCard/StatCard';
 import styles from './Dashboard.module.css';
@@ -24,13 +24,16 @@ const DashboardPage = ({ data, setActiveNav }) => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Dashboard</h1>
+      <h1 className={styles.title}>Dashboard Overview</h1>
      
       <div className={styles.statsGrid}>
         <StatCard title="Total Birds" value={data.stats.totalBirds.toLocaleString()} icon={Bird} color="blue" />
-        <StatCard title="Feed Used (Today)" value={`${data.dailySummary.feed} bags`} icon={Package} color="yellow" />
-        <StatCard title="Mortality (Today)" value={data.dailySummary.mortality} icon={HeartPulse} color="red" />
+        <StatCard title="Eggs Produced" value={data.dailySummary.eggs} icon={Package} color="yellow" />
+        <StatCard title="Feed Used (Today)" value={`${data.dailySummary.feed} bags`} icon={Package} color="green" />
+        <StatCard title="Sick Birds (Today)" value={data.dailySummary.sick} icon={HeartPulse} color="yellow" />
+        <StatCard title="Mortality (Today)" value={data.dailySummary.mortality} icon={Skull} color="red" />
         <StatCard title="Total Sales" value={`₦${data.stats.sales.toLocaleString()}`} icon={DollarSign} color="green" />
+
       </div>
      
       <div className={styles.mainGrid}>

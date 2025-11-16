@@ -5,14 +5,14 @@
 }
 
 .title {
-  font-size: 30px;
+  font-size: 24px;
   font-weight: bold;
   color: #1F2937;
   margin-bottom: 32px;
 }
 
 .summary {
-  background: linear-gradient(to right, #b7c6bf, #a5acb5);
+  background: linear-gradient(to right, #d4f1e3, #aac4e6);
   border-radius: 12px;
   padding: 24px;
   margin-bottom: 32px;
@@ -154,4 +154,17 @@
   to {
     transform: rotate(360deg);
   }
+}
+.noBatches {
+  padding: 40px;
+  text-align: center;
+  background-color: #FEF3C7;
+  border-radius: 8px;
+  border: 1px solid #FCD34D;
+}
+
+.noBatches p {
+  color: #92400E;
+  font-size: 14px;
+  margin: 0;
 }
