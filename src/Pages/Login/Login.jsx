@@ -1,6 +1,5 @@
-// src/pages/Login/LoginPage.jsx
 import React, { useState } from 'react';
-import { User, Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { User, Mail, Lock, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 import IconInput from '../../components/common/IconInput/IconInput';
 import FormMessage from '../../components/common/FormMessage/FormMessage';
 import styles from './Login.module.css';
@@ -10,12 +9,15 @@ import {
   createUserWithEmailAndPassword, 
   GoogleAuthProvider, 
   signInWithPopup, 
-  updateProfile 
+  updateProfile,
+  sendPasswordResetEmail
 } from 'firebase/auth';
 
 const LoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  const [resetEmail, setResetEmail] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,6 +57,42 @@ const LoginPage = () => {
       if (error.code === 'auth/invalid-email') text = 'Invalid email address.';
       if (error.code === 'auth/email-already-in-use') text = 'Email already in use.';
       if (error.code === 'auth/weak-password') text = 'Password should be at least 6 characters.';
+      if (error.code === 'auth/invalid-credential') text = 'Invalid email or password.';
+
+      setMessage({ type: 'error', text });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    if (!auth || !resetEmail) return;
+
+    setIsLoading(true);
+    setMessage({ type: 'info', text: 'Sending password reset email...' });
+
+    try {
+      await sendPasswordResetEmail(auth, resetEmail);
+      setMessage({ 
+        type: 'success', 
+        text: 'Password reset email sent! Check your inbox.' 
+      });
+      
+      // Auto switch back to login after 3 seconds
+      setTimeout(() => {
+        setIsForgotPassword(false);
+        setResetEmail('');
+        setMessage(null);
+      }, 3000);
+
+    } catch (error) {
+      console.error('Password reset error:', error.code, error.message);
+
+      let text = 'Failed to send reset email. Please try again.';
+      if (error.code === 'auth/user-not-found') text = 'No account found with this email.';
+      if (error.code === 'auth/invalid-email') text = 'Invalid email address.';
+      if (error.code === 'auth/too-many-requests') text = 'Too many requests. Please try again later.';
 
       setMessage({ type: 'error', text });
     } finally {
@@ -81,6 +119,56 @@ const LoginPage = () => {
     }
   };
 
+  const handleBackToLogin = () => {
+    setIsForgotPassword(false);
+    setResetEmail('');
+    setMessage(null);
+  };
+
+  // Forgot Password View
+  if (isForgotPassword) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.wrapper}>
+          <div className={styles.card}>
+            <button onClick={handleBackToLogin} className={styles.backButton}>
+              <ArrowLeft size={20} />
+              Back to Login
+            </button>
+
+            <div className={styles.logoSection}>
+              <h1 className={styles.logo}>FarmSync</h1>
+            </div>
+
+            <h2 className={styles.title}>Reset Password</h2>
+            <p className={styles.subtitle}>
+              Enter your email address and we'll send you a link to reset your password.
+            </p>
+
+            <FormMessage message={message} />
+
+            <form onSubmit={handleForgotPassword} className={styles.form}>
+              <IconInput
+                icon={Mail}
+                type="email"
+                placeholder="Enter your email"
+                value={resetEmail}
+                onChange={(e) => setResetEmail(e.target.value)}
+                required
+                disabled={isLoading}
+              />
+
+              <button type="submit" className={styles.submitButton} disabled={isLoading}>
+                {isLoading ? 'Sending...' : 'Send Reset Link'}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Login/Signup View
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -133,6 +221,17 @@ const LoginPage = () => {
                 endIcon={showPassword ? EyeOff : Eye}
                 onEndIconClick={() => setShowPassword(!showPassword)}
               />
+              {isLogin && (
+                <div className={styles.forgotPassword}>
+                  <button 
+                    type="button" 
+                    onClick={() => setIsForgotPassword(true)}
+                    disabled={isLoading}
+                  >
+                    Forgot Password?
+                  </button>
+                </div>
+              )}
             </div>
 
             <button type="submit" className={styles.submitButton} disabled={isLoading}>
@@ -158,7 +257,14 @@ const LoginPage = () => {
 
           <div className={styles.switchMode}>
             <span>{isLogin ? "Don't have an account?" : "Already have an account?"} </span>
-            <button onClick={() => setIsLogin(!isLogin)} disabled={isLoading}>
+            <button 
+              type="button"
+              onClick={() => {
+                setIsLogin(!isLogin);
+                setMessage(null);
+              }} 
+              disabled={isLoading}
+            >
               {isLogin ? 'Sign Up' : 'Login'}
             </button>
           </div>
