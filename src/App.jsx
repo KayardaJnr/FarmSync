@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Home, PlusCircle, Package, Pill, Warehouse, HeartPulse, DollarSign, ShoppingCart, BarChart3, Bell } from 'lucide-react';
+import { Home, PlusCircle, Package, Pill, Warehouse, HeartPulse, DollarSign, ShoppingCart, BarChart3, Bell, FileText } from 'lucide-react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, onSnapshot, collection, query } from 'firebase/firestore';
 import { auth, db } from './services/firebase';
-import MainLayout from "./layouts/MainLayout.jsx";
+import MainLayout from "./layouts/MainLayout";
 import LoginPage from './pages/Login/Login';
 import AppRoutes from './routes/AppRoutes';
 import { INITIAL_DATA } from './utils/constants';
@@ -28,7 +28,6 @@ const menuItems = [
   { label: 'Expense & Profit', icon: DollarSign, path: '/expense-profit' },
   { label: 'Sales & Distribution', icon: ShoppingCart, path: '/sales-distribution' },
   { label: 'Analytics', icon: BarChart3, path: '/analytics' },
-  // eslint-disable-next-line no-undef
   { label: 'Reports', icon: FileText, path: '/reports' }, 
   { label: 'Notifications', icon: Bell, path: '/notifications' },
 ];

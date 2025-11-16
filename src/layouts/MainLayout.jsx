@@ -1,9 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-// import Sidebar from '../../components/common/Sidebar/Sidebar';
-import Sidebar from "../../components/common/Sidebar/Sidebar.jsx";
-
-import TopBar from '../../components/common/TopBar/TopBar.jsx';
+import Sidebar from '../components/common/Sidebar/Sidebar';
+import TopBar from '../components/common/TopBar/TopBar';
 import styles from './MainLayout.module.css';
 
 const MainLayout = ({ 
@@ -12,7 +10,7 @@ const MainLayout = ({
   isCollapsed, 
   setIsCollapsed, 
   onLogout,
-  user  // Add user prop
+  user
 }) => {
   return (
     <div className={styles.layout}>
