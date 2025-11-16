@@ -9,9 +9,8 @@ import HealthMonitoringPage from '../pages/HealthMonitoring/HealthMonitoring';
 import ExpenseProfitTrackingPage from '../pages/ExpenseProfitTracking/ExpenseProfitTracking';
 import SalesDistributionPage from '../pages/SalesDistribution/SalesDistribution';
 import AnalyticsDashboardPage from '../pages/AnalyticsDashboard/AnalyticsDashboard';
-import NotificationsAlertsPage from '../Pages/NotificationsAlerts/NotificationsAlerts';
+import NotificationsAlertsPage from '../pages/NotificationsAlerts/NotificationsAlerts';
 import ReportsPage from '../pages/Reports/Reports';
-
 
 const AppRoutes = ({ data, db, userId }) => {
   return (
