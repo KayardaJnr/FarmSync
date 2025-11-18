@@ -5,6 +5,7 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, onSnapshot, collection, query } from 'firebase/firestore';
 import { auth, db } from './services/firebase';
 import MainLayout from "./layouts/MainLayout";
+import LandingPage from './pages/Landing/Landing';
 import LoginPage from './pages/Login/Login';
 import AppRoutes from './routes/AppRoutes';
 import { INITIAL_DATA } from './utils/constants';
@@ -141,8 +142,14 @@ const menuItems = [
     );
   }
 
-  if (!user) {
-    return <LoginPage auth={auth} db={db} />;
+if (!user) {
+    return (
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    );
   }
 
   const unreadCount = data.notifications.filter((n) => !n.read).length;
