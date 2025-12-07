@@ -106,11 +106,11 @@ const LandingPage = () => {
             <p>Streamline your poultry farm activities, improve efficiency, and ensure the health of your flock with our comprehensive management platform.</p>
             <div className="hero-buttons">
               <a href="#" onClick={(e) => { e.preventDefault(); navigate('/login'); }} className="btn btn-primary">Get Started</a>
-              <a href="#" className="btn btn-secondary">Watch Demo</a>
+              <a href="src/assets/intro.mp4" className="btn btn-secondary">Watch Demo</a>
             </div>
           </div>
           <div className="hero-image">
-            <img src="Assets/file.svg" alt="Illustration of poultry farm management" onError={(e) => e.target.style.display='none'} />
+            <img src="src/assets/file.svg" alt="Illustration of poultry farm management" onError={(e) => e.target.style.display='none'} />
           </div>
         </div>
       </header>
@@ -404,14 +404,14 @@ const LandingPage = () => {
                 </a>
               </li>
               <li>
-                <a href="#" aria-label="Connect with us on LinkedIn">
+                <a href="https://www.linkedin.com/in/farmsync-app-610253390" aria-label="Connect with us on LinkedIn">
                   <svg fill="currentColor" viewBox="0 0 24 24">
                     <path d="M19,3H5C3.89,3,3,3.9,3,5V19C3,20.1,3.9,21,5,21H19C20.1,21,21,20.1,21,19V5C21,3.9,20.1,3,19,3M8.5,18H5.5V8H8.5V18M6.9,6.48C5.96,6.48,5.18,5.7,5.18,4.74C5.18,3.79,5.96,3,6.9,3C7.84,3,8.62,3.79,8.62,4.74C8.62,5.7,7.84,6.48,6.9,6.48M18.5,18H15.5V13.25C15.5,12.03,15.48,10.43,13.88,10.43C12.28,10.43,12.03,11.79,12.03,13.15V18H9V8H11.9V9.39H11.94C12.39,8.59,13.3,8,14.93,8C18.05,8,18.5,10.09,18.5,12.61V18Z"/>
                   </svg>
                 </a>
               </li>
               <li>
-                <a href="#" aria-label="Follow us on Facebook">
+                <a href="https://www.facebook.com/share/1A1WC4Bfvn/?mibextid=wwXIfr" aria-label="Follow us on Facebook">
                   <svg fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14,13.5L14.8,9.5H11.5V6.5C11.5,5.25 11.83,4.5 13.5,4.5H15V1.14C14.68,1.1 13.3,1 11.9,1C9.12,1 7.5,2.78 7.5,5.69V9.5H4V13.5H7.5V23H11.5V13.5H14Z"/>
                   </svg>
