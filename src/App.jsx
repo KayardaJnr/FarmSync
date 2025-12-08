@@ -5,7 +5,7 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, onSnapshot, collection, query } from 'firebase/firestore';
 import { auth, db } from './services/firebase';
 import MainLayout from "./layouts/MainLayout";
-// import LandingPage from './pages/Landing/Landing';
+import LandingPage from '.src/pages/Landing/Landing';
 import LoginPage from './pages/Login/Login';
 import AppRoutes from './routes/AppRoutes';
 import { INITIAL_DATA } from './utils/constants';
@@ -137,7 +137,7 @@ const menuItems = [
     return (
       <div className={styles.loading}>
         <div className={styles.spinner}></div>
-        <p>Loading FarmSync...</p>
+        {/* <p>Loading FarmSync...</p> */}
       </div>
     );
   }
