@@ -54,7 +54,7 @@ const SalesDistributionPage = ({ data, db, userId }) => {
 
   const totalSales = data.sales.reduce((acc, curr) => acc + curr.amount, 0);
   const eggsSold = data.sales.filter(s => s.item.toLowerCase().includes('egg')).reduce((acc, s) => acc + s.quantity, 0);
-  const birdsSold = data.sales.filter(s => s.item.toLowerCase().includes('bird') || s.item.toLowerCase().includes('broiler')).reduce((acc, s) => acc + s.quantity, 0);
+  const birdsSold = data.sales.filter(s => s.item.toLowerCase().includes('feed') || s.item.toLowerCase().includes('bag')).reduce((acc, s) => acc + s.quantity, 0);
 
   return (
     <div className={styles.container}>
@@ -69,7 +69,7 @@ const SalesDistributionPage = ({ data, db, userId }) => {
       <div className={styles.statsRow}>
         <StatCard title="Total Sales" value={`₦${totalSales.toLocaleString()}`} icon={DollarSign} color="green" />
         <StatCard title="Eggs Sold (Crates)" value={eggsSold.toLocaleString()} icon={Droplet} color="yellow" />
-        <StatCard title="Birds Sold" value={birdsSold.toLocaleString()} icon={Bird} color="blue" />
+        <StatCard title="Feed Sold (Bags)" value={birdsSold.toLocaleString()} icon={Package} color="blue" />
       </div>
      
       <DataTable 

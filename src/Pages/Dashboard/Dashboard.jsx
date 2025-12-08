@@ -6,11 +6,11 @@ import styles from './Dashboard.module.css';
 
 const DashboardPage = ({ data, setActiveNav }) => {
   const inventoryPieData = [
-    { name: 'Layer Feed', value: data.inventory.find(i => i.item === 'Layer Feed')?.stock || 0 },
-    { name: 'Wood Shavings', value: data.inventory.find(i => i.item === 'Wood Shavings')?.stock || 0 },
+    { name: 'Layer Mash', value: data.inventory.find(i => i.item === 'Layer Mash')?.stock || 84 },
+    { name: 'Grower Starter', value: data.inventory.find(i => i.item === 'Grower Starter')?.stock || 25 },
   ].filter(item => item.value > 0);
  
-  const COLORS = ['#FFBB28', '#8B4513'];
+  const COLORS = ['#552ffbff', '#ff9a53ff'];
 
   const productionData = [
     { name: 'Mon', Crates: 50, Bags: 20 },
@@ -27,12 +27,12 @@ const DashboardPage = ({ data, setActiveNav }) => {
       <h1 className={styles.title}>Dashboard Overview</h1>
      
       <div className={styles.statsGrid}>
-        <StatCard title="Total Birds" value={data.stats.totalBirds.toLocaleString()} icon={Bird} color="blue" />
+        <StatCard title="Total Birds" value={data.batches.reduce((acc, b) => acc + b.quantity, 0).toLocaleString()} icon={Bird} color="blue" />
         <StatCard title="Eggs Produced" value={data.dailySummary.eggs} icon={Package} color="yellow" />
         <StatCard title="Feed Used (Today)" value={`${data.dailySummary.feed} bags`} icon={Package} color="green" />
         <StatCard title="Sick Birds (Today)" value={data.dailySummary.sick} icon={HeartPulse} color="yellow" />
         <StatCard title="Mortality (Today)" value={data.dailySummary.mortality} icon={Skull} color="red" />
-        <StatCard title="Total Sales" value={`₦${data.stats.sales.toLocaleString()}`} icon={DollarSign} color="green" />
+        <StatCard title="Total Sales" value={`₦${data.sales?.reduce((acc, s) => acc + s.amount, 0).toLocaleString() || 0}`} icon={DollarSign} color="green" />
 
       </div>
      
