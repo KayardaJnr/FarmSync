@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import demoVideo from "../../assets/intro.mp4";
+import heroImage from "../../assets/file.svg";
 import './Landing.css';
 
 const LandingPage = () => {
@@ -95,7 +97,7 @@ const LandingPage = () => {
             <a href="#features">Features</a>
             <a href="#how-it-works">How It Works</a>
             <a href="#pricing">Pricing</a>
-            <a href="#info" onClick={(e) => { e.preventDefault(); navigate('/contact'); }}>Contact Us</a>
+            <a href="#contact" >Contact Us</a>
             <a href="#" onClick={(e) => { e.preventDefault(); navigate('/login'); }} className="sign-up-btn">Get Started</a>
           </div>
         </nav>
@@ -106,11 +108,11 @@ const LandingPage = () => {
             <p>Streamline your poultry farm activities, improve efficiency, and ensure the health of your flock with our comprehensive management platform.</p>
             <div className="hero-buttons">
               <a href="#" onClick={(e) => { e.preventDefault(); navigate('/login'); }} className="btn btn-primary">Get Started</a>
-              <a href="src/assets/intro.mp4" className="btn btn-secondary">Watch Demo</a>
+              <a href={demoVideo} className="btn btn-secondary">Watch Demo</a>
             </div>
           </div>
           <div className="hero-image">
-            <img src="src/assets/file.svg" alt="Illustration of poultry farm management" onError={(e) => e.target.style.display='none'} />
+            <img src={heroImage} alt="Illustration of poultry farm management" onError={(e) => e.target.style.display='none'} />
           </div>
         </div>
       </header>
@@ -369,7 +371,7 @@ const LandingPage = () => {
           </div>
 
           <div className="footer-section">
-            <h3>Contact Us</h3>
+            <h3 id='contact'>Contact Us</h3>
             <div className="contact-item">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
