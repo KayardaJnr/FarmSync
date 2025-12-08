@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import demoVideo from "../../assets/intro.mp4";
 import heroImage from "../../assets/file.svg";
-import './Landing.css';
+import styles from './Landing.module.css';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ const LandingPage = () => {
       if (targetElement) {
         e.preventDefault();
         
-        const collapsibleItem = targetElement.closest('.collapsible-item');
+        const collapsibleItem = targetElement.closest(`.${styles.collapsibleItem}`);
         if (collapsibleItem) {
           const sectionId = targetElement.id;
           setExpandedSections(prev => ({ ...prev, [sectionId]: true }));
@@ -71,24 +71,24 @@ const LandingPage = () => {
 
   return (
     <div id="home">
-      <a href="#main" className="skip-link">Skip to main content</a>
+      <a href="#main" className={styles.skipLink}>Skip to main content</a>
       
-      <header className="hero-section" role="banner">
+      <header className={styles.heroSection} role="banner">
         <nav>
-          <div className="logo" role="banner">
+          <div className={styles.logo} role="banner">
             <a href="#home">FarmSync</a>
           </div>
           <button 
-            className="nav-toggle" 
+            className={styles.navToggle}
             aria-label="Toggle menu" 
             aria-expanded={mobileMenuOpen}
             aria-controls="nav-menu"
             onClick={toggleMobileMenu}
           >
-            <span className="hamburger"></span>
+            <span className={styles.hamburger}></span>
           </button>
           <div 
-            className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`} 
+            className={`${styles.navLinks} ${mobileMenuOpen ? styles.mobileOpen : ''}`}
             id="nav-menu" 
             role="navigation" 
             aria-label="Main menu"
@@ -97,77 +97,77 @@ const LandingPage = () => {
             <a href="#features">Features</a>
             <a href="#how-it-works">How It Works</a>
             <a href="#pricing">Pricing</a>
-            <a href="#contact" >Contact Us</a>
-            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/login'); }} className="sign-up-btn">Get Started</a>
+            <a href="#contact">Contact Us</a>
+            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/login'); }} className={styles.signUpBtn}>Get Started</a>
           </div>
         </nav>
 
-        <div className="hero-content">
-          <div className="hero-text">
+        <div className={styles.heroContent}>
+          <div className={styles.heroText}>
             <h1>Optimize Your Poultry Farm Operations with FarmSync Poultry Management System</h1>
             <p>Streamline your poultry farm activities, improve efficiency, and ensure the health of your flock with our comprehensive management platform.</p>
-            <div className="hero-buttons">
-              <a href="#" onClick={(e) => { e.preventDefault(); navigate('/login'); }} className="btn btn-primary">Get Started</a>
-              <a href={demoVideo} className="btn btn-secondary">Watch Demo</a>
+            <div className={styles.heroButtons}>
+              <a href="#" onClick={(e) => { e.preventDefault(); navigate('/login'); }} className={`${styles.btn} ${styles.btnPrimary}`}>Get Started</a>
+              <a href={demoVideo} className={`${styles.btn} ${styles.btnSecondary}`}>Watch Demo</a>
             </div>
           </div>
-          <div className="hero-image">
+          <div className={styles.heroImage}>
             <img src={heroImage} alt="Illustration of poultry farm management" onError={(e) => e.target.style.display='none'} />
           </div>
         </div>
       </header>
 
       <main id="main">
-        <section className="features-section" id="features" role="region" aria-labelledby="features-title">
-          <div className="features-header section-header">
+        <section className={styles.featuresSection} id="features" role="region" aria-labelledby="features-title">
+          <div className={`${styles.featuresHeader} ${styles.sectionHeader}`}>
             <h2 id="features-title">Features</h2>
             <p>A comprehensive suite of features designed to meet the specific needs of your poultry farm</p>
           </div>
 
-          <div className="features-grid">
-            <div className="feature-card">
-              <div className="feature-icon icon-blue">
+          <div className={styles.featuresGrid}>
+            <div className={styles.featureCard}>
+              <div className={`${styles.featureIcon} ${styles.iconBlue}`}>
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                 </svg>
               </div>
-              <div className="feature-content">
+              <div className={styles.featureContent}>
                 <h3>Advanced Health Monitoring</h3>
                 <p>Monitor and manage the wellbeing of flock</p>
               </div>
             </div>
 
-            <div className="feature-card">
-              <div className="feature-icon icon-yellow">
+            <div className={styles.featureCard}>
+              <div className={`${styles.featureIcon} ${styles.iconYellow}`}>
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                 </svg>
               </div>
-              <div className="feature-content">
+              <div className={styles.featureContent}>
                 <h3>Disease Risk</h3>
                 <p>Identify and mitigate threats to flock health</p>
               </div>
             </div>
 
-            <div className="feature-card">
-              <div className="feature-icon icon-cyan">
+            <div className={styles.featureCard}>
+              <div className={`${styles.featureIcon} ${styles.iconCyan}`}>
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/>
                 </svg>
               </div>
-              <div className="feature-content">
+              <div className={styles.featureContent}>
                 <h3>Feed Management</h3>
                 <p>Track resources and optimize fee nutrition</p>
               </div>
             </div>
 
-            <div className="feature-card">
-              <div className="feature-icon icon-orange">
+            <div className={styles.featureCard}>
+              <div className={`${styles.featureIcon} ${styles.iconOrange}`}>
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                 </svg>
               </div>
-              <div className="feature-content">
+              <div className={styles.featureContent}>
                 <h3>Sales and Finance Analysts</h3>
                 <p>Increase profitability with actionable</p>
               </div>
@@ -175,134 +175,134 @@ const LandingPage = () => {
           </div>
         </section>
 
-        <section className="how-it-works-section" id="how-it-works" role="region" aria-labelledby="how-it-works-title">
-          <div className="section-header">
+        <section className={styles.howItWorksSection} id="how-it-works" role="region" aria-labelledby="how-it-works-title">
+          <div className={styles.sectionHeader}>
             <h2 id="how-it-works-title">How It Works</h2>
             <p>Get started in just three simple steps and transform your farm management today.</p>
           </div>
-          <div className="how-it-works-grid">
-            <div className="how-it-works-step">
-              <div className="step-number">1</div>
+          <div className={styles.howItWorksGrid}>
+            <div className={styles.howItWorksStep}>
+              <div className={styles.stepNumber}>1</div>
               <h3>Set Up Your Farm</h3>
               <p>Easily create digital profiles for your poultry houses, flocks, and feed bins.</p>
             </div>
-            <div className="how-it-works-step">
-              <div className="step-number">2</div>
+            <div className={styles.howItWorksStep}>
+              <div className={styles.stepNumber}>2</div>
               <h3>Monitor Real-Time Data</h3>
               <p>Track daily feed consumption, water usage, mortality, and health records.</p>
             </div>
-            <div className="how-it-works-step">
-              <div className="step-number">3</div>
+            <div className={styles.howItWorksStep}>
+              <div className={styles.stepNumber}>3</div>
               <h3>Get Actionable Insights</h3>
               <p>Use our dashboard to analyze performance, predict costs, and boost profitability.</p>
             </div>
           </div>
         </section>
 
-        <section className="pricing-section" id="pricing" role="region" aria-labelledby="pricing-title">
-          <div className="pricing-header">
+        <section className={styles.pricingSection} id="pricing" role="region" aria-labelledby="pricing-title">
+          <div className={styles.pricingHeader}>
             <h2 id="pricing-title">Pricing</h2>
             <p>Choose a plan that fits your farm. No hidden fees — upgrade or cancel anytime.</p>
           </div>
 
-          <div className="pricing-grid">
-            <div className="plan-card">
-              <div className="plan-header">
+          <div className={styles.pricingGrid}>
+            <div className={styles.planCard}>
+              <div className={styles.planHeader}>
                 <h3>Basic</h3>
-                <div className="plan-price">Free</div>
+                <div className={styles.planPrice}>Free</div>
               </div>
-              <ul className="plan-features">
+              <ul className={styles.planFeatures}>
                 <li>
-                  <svg className="feature-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+                  <svg className={styles.featureCheck} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                   </svg>
                   <span>Up to 2 sites</span>
                 </li>
                 <li>
-                  <svg className="feature-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+                  <svg className={styles.featureCheck} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                   </svg>
                   <span>Basic monitoring</span>
                 </li>
                 <li>
-                  <svg className="feature-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+                  <svg className={styles.featureCheck} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                   </svg>
                   <span>Email support</span>
                 </li>
               </ul>
-              <div className="plan-actions">
-                <a href="#" onClick={(e) => { e.preventDefault(); navigate('/login'); }} className="btn btn-outline-green plan-cta">Start Free</a>
+              <div className={styles.planActions}>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigate('/login'); }} className={`${styles.btn} ${styles.btnOutlineGreen} ${styles.planCta}`}>Start Free</a>
               </div>
             </div>
 
-            <div className="plan-card plan-popular" aria-describedby="popular-desc">
-              <div className="plan-header">
+            <div className={`${styles.planCard} ${styles.planPopular}`} aria-describedby="popular-desc">
+              <div className={styles.planHeader}>
                 <h3>Pro</h3>
-                <div className="plan-price">₦4,990<span className="per">/mo</span></div>
+                <div className={styles.planPrice}>₦4,990<span className={styles.per}>/mo</span></div>
               </div>
-              <div id="popular-desc" className="sr-only">Most popular</div>
-              <ul className="plan-features">
+              <div id="popular-desc" className={styles.srOnly}>Most popular</div>
+              <ul className={styles.planFeatures}>
                 <li>
-                  <svg className="feature-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+                  <svg className={styles.featureCheck} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                   </svg>
                   <span>Up to 10 sites</span>
                 </li>
                 <li>
-                  <svg className="feature-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+                  <svg className={styles.featureCheck} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                   </svg>
                   <span>Advanced analytics</span>
                 </li>
                 <li>
-                  <svg className="feature-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+                  <svg className={styles.featureCheck} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                   </svg>
                   <span>Priority support</span>
                 </li>
               </ul>
-              <div className="plan-actions">
-                <a href="#" onClick={(e) => { e.preventDefault(); navigate('/login'); }} className="btn btn-primary plan-cta">Get Pro</a>
+              <div className={styles.planActions}>
+                <a href="#" onClick={(e) => { e.preventDefault(); navigate('/login'); }} className={`${styles.btn} ${styles.btnPrimary} ${styles.planCta}`}>Get Pro</a>
               </div>
             </div>
 
-            <div className="plan-card">
-              <div className="plan-header">
+            <div className={styles.planCard}>
+              <div className={styles.planHeader}>
                 <h3>Enterprise</h3>
-                <div className="plan-price">Contact</div>
+                <div className={styles.planPrice}>Contact</div>
               </div>
-              <ul className="plan-features">
+              <ul className={styles.planFeatures}>
                 <li>
-                  <svg className="feature-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+                  <svg className={styles.featureCheck} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                   </svg>
                   <span>Unlimited sites</span>
                 </li>
                 <li>
-                  <svg className="feature-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+                  <svg className={styles.featureCheck} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                   </svg>
                   <span>Custom integrations</span>
                 </li>
                 <li>
-                  <svg className="feature-check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+                  <svg className={styles.featureCheck} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                   </svg>
                   <span>Dedicated success manager</span>
                 </li>
               </ul>
-              <div className="plan-actions">
-                <a href="#info" className="btn btn-outline-green plan-cta">Contact Sales</a>
+              <div className={styles.planActions}>
+                <a href="#info" className={`${styles.btn} ${styles.btnOutlineGreen} ${styles.planCta}`}>Contact Sales</a>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="info-section" id="info">
-          <div className="collapsible-item" id="about">
+        <section className={styles.infoSection} id="info">
+          <div className={styles.collapsibleItem} id="about">
             <button 
-              className="collapsible-toggle" 
+              className={styles.collapsibleToggle}
               aria-expanded={expandedSections.about || false}
               aria-controls="about-content"
               onClick={() => toggleCollapsible('about')}
@@ -310,7 +310,7 @@ const LandingPage = () => {
               About Us
             </button>
             {!expandedSections.about ? null : (
-              <div className="collapsible-content" id="about-content">
+              <div className={styles.collapsibleContent} id="about-content">
                 <h3>Our Mission</h3>
                 <p>At FarmSync, our mission is to empower poultry farmers with the digital tools they need to succeed. We believe that technology can revolutionize agriculture, making it more efficient, sustainable, and profitable for everyone, from small-scale farmers to large enterprises.</p>
                 <h3>Our Story</h3>
@@ -319,9 +319,9 @@ const LandingPage = () => {
             )}
           </div>
 
-          <div className="collapsible-item" id="privacy">
+          <div className={styles.collapsibleItem} id="privacy">
             <button 
-              className="collapsible-toggle" 
+              className={styles.collapsibleToggle}
               aria-expanded={expandedSections.privacy || false}
               aria-controls="privacy-content"
               onClick={() => toggleCollapsible('privacy')}
@@ -329,7 +329,7 @@ const LandingPage = () => {
               Privacy Policy
             </button>
             {!expandedSections.privacy ? null : (
-              <div className="collapsible-content" id="privacy-content">
+              <div className={styles.collapsibleContent} id="privacy-content">
                 <h3>1. Information We Collect</h3>
                 <p>We collect information you provide directly to us, such as when you create an account, enter farm data (flock size, feed consumption, etc.), or contact us for support. We also collect limited data automatically, like usage statistics, to improve our service.</p>
                 <h3>2. How We Use Your Information</h3>
@@ -340,9 +340,9 @@ const LandingPage = () => {
             )}
           </div>
 
-          <div className="collapsible-item" id="terms">
+          <div className={styles.collapsibleItem} id="terms">
             <button 
-              className="collapsible-toggle" 
+              className={styles.collapsibleToggle}
               aria-expanded={expandedSections.terms || false}
               aria-controls="terms-content"
               onClick={() => toggleCollapsible('terms')}
@@ -350,7 +350,7 @@ const LandingPage = () => {
               Terms of Service
             </button>
             {!expandedSections.terms ? null : (
-              <div className="collapsible-content" id="terms-content">
+              <div className={styles.collapsibleContent} id="terms-content">
                 <h3>1. Acceptance of Terms</h3>
                 <p>By creating an account and using the FarmSync platform, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our service.</p>
                 <h3>2. Your Account</h3>
@@ -364,21 +364,21 @@ const LandingPage = () => {
       </main>
 
       <footer role="contentinfo">
-        <div className="footer-content">
-          <div className="footer-brand">
+        <div className={styles.footerContent}>
+          <div className={styles.footerBrand}>
             <h2>FarmSync</h2>
             <p>Poultry Management System</p>
           </div>
 
-          <div className="footer-section">
+          <div className={styles.footerSection}>
             <h3 id='contact'>Contact Us</h3>
-            <div className="contact-item">
+            <div className={styles.contactItem}>
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
               </svg>
               <span> +234 806 237 0912</span>
             </div>
-            <div className="contact-item">
+            <div className={styles.contactItem}>
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
               </svg>
@@ -386,18 +386,18 @@ const LandingPage = () => {
             </div>
           </div>
 
-          <div className="footer-section">
+          <div className={styles.footerSection}>
             <h3>Quick Links</h3>
-            <ul className="footer-links">
+            <ul className={styles.footerLinks}>
               <li><a href="#about">About Us</a></li>
               <li><a href="#privacy">Privacy Policy</a></li>
               <li><a href="#terms">Terms of Service</a></li>
             </ul>
           </div>
 
-          <div className="footer-section">
+          <div className={styles.footerSection}>
             <h3>Follow Us</h3>
-            <ul className="social-links">
+            <ul className={styles.socialLinks}>
               <li>
                 <a href="#" aria-label="Follow us on Twitter">
                   <svg fill="currentColor" viewBox="0 0 24 24">
@@ -423,16 +423,16 @@ const LandingPage = () => {
           </div>
         </div>
 
-        <div className="footer-bottom">
+        <div className={styles.footerBottom}>
           &copy; 2025 FarmSync. All Rights Reserved.
         </div>
       </footer>
 
       {modalVisible && (
-        <div className={`custom-modal-overlay ${modalVisible ? 'visible' : ''}`} onClick={closeModal}>
-          <div className="custom-modal" onClick={(e) => e.stopPropagation()}>
+        <div className={`${styles.customModalOverlay} ${modalVisible ? styles.visible : ''}`} onClick={closeModal}>
+          <div className={styles.customModal} onClick={(e) => e.stopPropagation()}>
             <p>{modalMessage}</p>
-            <button className="btn btn-primary" onClick={closeModal}>OK</button>
+            <button className={`${styles.btn} ${styles.btnPrimary}`} onClick={closeModal}>OK</button>
           </div>
         </div>
       )}
