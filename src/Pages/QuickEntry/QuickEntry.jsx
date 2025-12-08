@@ -1,20 +1,40 @@
-import React, { useState } from 'react';
+// src/pages/QuickEntry/QuickEntryPage.jsx
+import React, { useState, useEffect } from 'react';
 import { Droplet, Package, HeartPulse, X, Save, Clock } from 'lucide-react';
 import IconInput from '../../components/common/IconInput/IconInput';
 import FormMessage from '../../components/common/FormMessage/FormMessage';
-import { collection, doc, addDoc, setDoc, increment } from 'firebase/firestore';
+import { collection, doc, addDoc, setDoc, increment, onSnapshot } from 'firebase/firestore';
+import { db } from '../../services/firebase';
 import styles from './QuickEntry.module.css';
 
-const QuickEntryPage = ({ data, db, userId }) => {
-  const [selectedBatch, setSelectedBatch] = useState(data.batches.length > 0 ? data.batches[0].id : '');
+const QuickEntryPage = ({ data, userId }) => {
+  const [selectedBatch, setSelectedBatch] = useState(data?.batches?.[0]?.id || '');
   const [record, setRecord] = useState({ eggs: 0, feed: 0, sick: 0, mortality: 0 });
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [dailySummary, setDailySummary] = useState({ eggs: 0, feed: 0, sick: 0, mortality: 0 });
 
+  // ===== Real-time listener for dailySummary =====
+  useEffect(() => {
+    if (!userId) return;
+    const summaryDocRef = doc(db, `artifacts/farmsync-app/users/${userId}/farm/dailySummary`);
+
+    const unsubscribe = onSnapshot(summaryDocRef, (docSnap) => {
+      if (docSnap.exists()) {
+        setDailySummary(docSnap.data());
+      } else {
+        // Create the document if it doesn't exist
+        setDoc(summaryDocRef, { eggs: 0, feed: 0, sick: 0, mortality: 0 }, { merge: true });
+        setDailySummary({ eggs: 0, feed: 0, sick: 0, mortality: 0 });
+      }
+    });
+
+    return () => unsubscribe();
+  }, [userId]);
+
+  // ===== Handle Save =====
   const handleSave = async () => {
-    if (!db || !userId || isLoading) return;
-
-    // Validate that a batch is selected
+    if (!userId || isLoading) return;
     if (!selectedBatch) {
       setMessage({ type: 'error', text: 'Please select a batch first.' });
       return;
@@ -26,51 +46,46 @@ const QuickEntryPage = ({ data, db, userId }) => {
     try {
       const appId = 'farmsync-app';
 
-      // 1. Add a daily record for the specific batch
+      // Add daily record
       const dailyRecordCol = collection(db, `artifacts/${appId}/users/${userId}/daily_records`);
       await addDoc(dailyRecordCol, {
         batchId: selectedBatch,
         date: new Date().toISOString(),
-        crates: Number(record.eggs),
-        bags: Number(record.feed),
-        sick: Number(record.sick),
-        mortality: Number(record.mortality),
+        crates: Number(record.eggs) || 0,
+        bags: Number(record.feed) || 0,
+        sick: Number(record.sick) || 0,
+        mortality: Number(record.mortality) || 0,
         timestamp: Date.now()
       });
 
-      // 2. Update the global daily summary document
+      // Update daily summary
       const summaryDocRef = doc(db, `artifacts/${appId}/users/${userId}/farm/dailySummary`);
       await setDoc(summaryDocRef, {
-        eggs: increment(Number(record.eggs)),
-        feed: increment(Number(record.feed)),
-        sick: increment(Number(record.sick)),
-        mortality: increment(Number(record.mortality)),
+        eggs: increment(Number(record.eggs) || 0),
+        feed: increment(Number(record.feed) || 0),
+        sick: increment(Number(record.sick) || 0),
+        mortality: increment(Number(record.mortality) || 0),
       }, { merge: true });
 
-      // 3. Update main stats
+      // Update farm stats
       const statsDocRef = doc(db, `artifacts/${appId}/users/${userId}/farm/stats`);
       await setDoc(statsDocRef, {
-        sick: increment(Number(record.sick)),
-        mortality: increment(Number(record.mortality))
+        sick: increment(Number(record.sick) || 0),
+        mortality: increment(Number(record.mortality) || 0)
       }, { merge: true });
-     
-      // Success message
-      setMessage({ type: 'success', text: 'Record saved successfully!' });
-      
-      // Reset form
-      setRecord({ eggs: 0, feed: 0, sick: 0, mortality: 0 });
 
+      // Reset form & show success
+      setMessage({ type: 'success', text: 'Record saved successfully!' });
+      setRecord({ eggs: 0, feed: 0, sick: 0, mortality: 0 });
     } catch (error) {
-      console.error("Error saving record: ", error);
+      console.error('Error saving record:', error);
       setMessage({ type: 'error', text: `Failed to save record: ${error.message}` });
     } finally {
       setIsLoading(false);
-      
-      // Clear message after 5 seconds
       setTimeout(() => setMessage(null), 5000);
     }
   };
- 
+
   const inputs = [
     { key: 'eggs', icon: Droplet, label: 'Crates (Eggs)' },
     { key: 'feed', icon: Package, label: 'Bags (Feed)' },
@@ -78,18 +93,17 @@ const QuickEntryPage = ({ data, db, userId }) => {
     { key: 'mortality', icon: X, label: 'Mortality' }
   ];
 
-  // Check if there are any active batches
-  const activeBatches = data.batches.filter(b => b.status === 'active');
+  const activeBatches = data?.batches?.filter(b => b.status === 'active') || [];
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Quick Entry</h1>
-      
-      {/* Today's Summary */}
+
+      {/* Daily Summary Cards */}
       <div className={styles.summary}>
         <h3 className={styles.summaryTitle}>Today's Total Summary</h3>
         <div className={styles.summaryGrid}>
-          {Object.entries(data.dailySummary).map(([key, val]) => (
+          {Object.entries(dailySummary).map(([key, val]) => (
             <div key={key} className={styles.summaryCard}>
               <div className={styles.summaryLabel}>
                 {key === 'eggs' ? 'Crates' : key === 'feed' ? 'Bags' : key.charAt(0).toUpperCase() + key.slice(1)}
@@ -99,16 +113,15 @@ const QuickEntryPage = ({ data, db, userId }) => {
           ))}
         </div>
       </div>
-     
+
       {/* Record Form */}
       <div className={styles.card}>
         <h2 className={styles.cardTitle}>Record Production for Batch</h2>
-       
         <FormMessage message={message} />
 
         {activeBatches.length === 0 ? (
           <div className={styles.noBatches}>
-            <p>No active batches found. Please create a batch first in Batch Management.</p>
+            <p>No active batches found. Please create a batch first.</p>
           </div>
         ) : (
           <>
@@ -116,8 +129,8 @@ const QuickEntryPage = ({ data, db, userId }) => {
               <label className={styles.label}>Select Batch</label>
               <div className={styles.batchButtons}>
                 {activeBatches.map(batch => (
-                  <button 
-                    key={batch.id} 
+                  <button
+                    key={batch.id}
                     type="button"
                     onClick={() => setSelectedBatch(batch.id)}
                     className={`${styles.batchButton} ${selectedBatch === batch.id ? styles.active : ''}`}
@@ -128,7 +141,7 @@ const QuickEntryPage = ({ data, db, userId }) => {
                 ))}
               </div>
             </div>
-           
+
             <div className={styles.inputGrid}>
               {inputs.map(item => (
                 <div key={item.key}>
@@ -144,10 +157,10 @@ const QuickEntryPage = ({ data, db, userId }) => {
                 </div>
               ))}
             </div>
-           
-            <button 
-              onClick={handleSave} 
-              disabled={isLoading || !selectedBatch} 
+
+            <button
+              onClick={handleSave}
+              disabled={isLoading || !selectedBatch}
               className={styles.saveButton}
             >
               {isLoading ? (
