@@ -25,7 +25,7 @@ const AppRoutes = ({ data, db, userId }) => {
       <Route path="/expense-profit" element={<ExpenseProfitTrackingPage data={data} db={db} userId={userId} />} />
       <Route path="/sales-distribution" element={<SalesDistributionPage data={data} db={db} userId={userId} />} />
       <Route path="/analytics" element={<AnalyticsDashboardPage data={data} />} />
-      <Route path="/reports" element={<ReportsPage data={data} />} />
+      <Route path="/reports" element={<coming  data={data} />} />
       <Route path="/notifications" element={<NotificationsAlertsPage data={data} db={db} userId={userId} />} />
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
