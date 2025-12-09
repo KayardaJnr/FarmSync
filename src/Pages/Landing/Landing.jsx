@@ -305,7 +305,7 @@ const LandingPage = () => {
               className={styles.collapsibleToggle}
               aria-expanded={expandedSections.about || false}
               aria-controls="about-content"
-              // onClick={() => toggleCollapsible('about')}
+              onClick={() => toggleCollapsible('about')}
             >
               About Us
             </button>
@@ -389,9 +389,9 @@ const LandingPage = () => {
           <div className={styles.footerSection}>
             <h3>Quick Links</h3>
             <ul className={styles.footerLinks}>
-              <li><a href="#abou">About Us</a></li>
-              <li><a href="#privac">Privacy Policy</a></li>
-              <li><a href="#term">Terms of Service</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#privacy">Privacy Policy</a></li>
+              <li><a href="#terms">Terms of Service</a></li>
             </ul>
           </div>
 

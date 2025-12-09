@@ -13,7 +13,6 @@
   height: 92px;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* keep original */
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -26,14 +25,15 @@
   font-size: 28px;
   font-weight: bold;
   display: block;
+  margin: 0 0 0 -20px;
 }
 
 .logoSubtext {
   font-size: 11px;
   opacity: 0.9;
-}
+  margin-left: -20px;
 
-/* Removed toggleButton styles */
+}
 
 .nav {
   flex: 1;
@@ -61,8 +61,6 @@
   border: none;
   cursor: pointer;
 }
-
-/* Removed .navItem.collapsed */
 
 .navItem:hover {
   background-color: rgba(255, 255, 255, 0.2);
@@ -93,8 +91,15 @@
   font-weight: bold;
 }
 
-/* Removed .badgeCollapsed */
-
 .logout {
   margin-top: auto;
+}
+
+img {
+  width: 100px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0  0 0 -20px;
 }
