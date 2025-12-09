@@ -7,10 +7,10 @@ import styles from './Dashboard.module.css';
 const DashboardPage = ({ data, setActiveNav }) => {
   const inventoryPieData = [
     { name: 'Layer Mash', value: data.inventory.find(i => i.item === 'Layer Mash')?.stock || 0 },
-    { name: 'Grower Starter', value: data.inventory.find(i => i.item === 'Grower Starter')?.stock || 0 },
+    { name: 'Grower Mash', value: data.inventory.find(i => i.item === 'Grower Mash')?.stock || 0 },
   ].filter(item => item.value > 0);
  
-  const COLORS = ['#552ffbff', '#ff9a53ff'];
+  const COLORS = ['#342ab9ff', '#ff9a53ff'];
 
   const productionData = [
     { name: 'Mon', Crates: 50, Bags: 20 },
