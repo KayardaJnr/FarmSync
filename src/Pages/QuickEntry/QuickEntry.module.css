@@ -158,8 +158,6 @@
 .noBatches {
   padding: 40px;
   text-align: center;
-  background: #6bb48985;
-  background-color: ;
   border-radius: 8px;
   background: #7aca9b85;
   border: 1px solid #6bb48985;
@@ -167,6 +165,6 @@
 
 .noBatches p {
   color: #000000;
-  font-size: 14px;
+  font-size: 16px;
   margin: 0;
 }
