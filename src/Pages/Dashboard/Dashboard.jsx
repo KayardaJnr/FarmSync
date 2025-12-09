@@ -6,8 +6,8 @@ import styles from './Dashboard.module.css';
 
 const DashboardPage = ({ data, setActiveNav }) => {
   const inventoryPieData = [
-    { name: 'Layer Mash', value: data.inventory.find(i => i.item === 'Layer Mash')?.stock || 84 },
-    { name: 'Grower Starter', value: data.inventory.find(i => i.item === 'Grower Starter')?.stock || 25 },
+    { name: 'Layer Mash', value: data.inventory.find(i => i.item === 'Layer Mash')?.stock || 0 },
+    { name: 'Grower Starter', value: data.inventory.find(i => i.item === 'Grower Starter')?.stock || 0 },
   ].filter(item => item.value > 0);
  
   const COLORS = ['#552ffbff', '#ff9a53ff'];
