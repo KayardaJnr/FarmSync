@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import demoVideo from "../../assets/intro.mp4";
-import heroImage from "../../assets/file.svg";
+import heroImage from "../../assets/Farmbarn.png";
 import styles from './Landing.module.css';
 
 const LandingPage = () => {
@@ -112,7 +112,7 @@ const LandingPage = () => {
             </div>
           </div>
           <div className={styles.heroImage}>
-            <img src={heroImage} alt="Illustration of poultry farm management" onError={(e) => e.target.style.display='none'} />
+            {/* <img src={heroImage} alt="Illustration of poultry farm management" onError={(e) => e.target.style.display='none'} /> */}
           </div>
         </div>
       </header>

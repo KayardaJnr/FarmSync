@@ -626,7 +626,7 @@ footer {
   box-shadow: 0 16px 40px rgba(29, 158, 83, 0.2);
 }
 
-.planPopular::before {
+/* .planPopular::before {
   content: 'Most Popular';
   position: absolute;
   top: 18px;
@@ -639,7 +639,7 @@ footer {
   transform: rotate(45deg);
   z-index: 1;
   letter-spacing: 0.5px;
-}
+} */
 
 .planHeader {
   display: flex;
