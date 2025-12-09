@@ -126,11 +126,11 @@ const LandingPage = () => {
 
           <div className={styles.featuresGrid}>
             <div className={styles.featureCard}>
-              <div className={`${styles.featureIcon} ${styles.iconBlue}`}>
+              {/* <div className={`${styles.featureIcon} ${styles.iconBlue}`}>
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                 </svg>
-              </div>
+              </div> */}
               <div className={styles.featureContent}>
                 <h3>Advanced Health Monitoring</h3>
                 <p>Monitor and manage the wellbeing of flock</p>
@@ -138,11 +138,11 @@ const LandingPage = () => {
             </div>
 
             <div className={styles.featureCard}>
-              <div className={`${styles.featureIcon} ${styles.iconYellow}`}>
+              {/* <div className={`${styles.featureIcon} ${styles.iconYellow}`}>
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                 </svg>
-              </div>
+              </div> */}
               <div className={styles.featureContent}>
                 <h3>Disease Risk</h3>
                 <p>Identify and mitigate threats to flock health</p>
@@ -150,11 +150,11 @@ const LandingPage = () => {
             </div>
 
             <div className={styles.featureCard}>
-              <div className={`${styles.featureIcon} ${styles.iconCyan}`}>
+              {/* <div className={`${styles.featureIcon} ${styles.iconCyan}`}>
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/>
                 </svg>
-              </div>
+              </div> */}
               <div className={styles.featureContent}>
                 <h3>Feed Management</h3>
                 <p>Track resources and optimize fee nutrition</p>
@@ -162,11 +162,11 @@ const LandingPage = () => {
             </div>
 
             <div className={styles.featureCard}>
-              <div className={`${styles.featureIcon} ${styles.iconOrange}`}>
+              {/* <div className={`${styles.featureIcon} ${styles.iconOrange}`}>
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                 </svg>
-              </div>
+              </div> */}
               <div className={styles.featureContent}>
                 <h3>Sales and Finance Analysts</h3>
                 <p>Increase profitability with actionable</p>
@@ -305,7 +305,7 @@ const LandingPage = () => {
               className={styles.collapsibleToggle}
               aria-expanded={expandedSections.about || false}
               aria-controls="about-content"
-              onClick={() => toggleCollapsible('about')}
+              // onClick={() => toggleCollapsible('about')}
             >
               About Us
             </button>
@@ -324,7 +324,7 @@ const LandingPage = () => {
               className={styles.collapsibleToggle}
               aria-expanded={expandedSections.privacy || false}
               aria-controls="privacy-content"
-              onClick={() => toggleCollapsible('privacy')}
+              // onClick={() => toggleCollapsible('privacy')}
             >
               Privacy Policy
             </button>
@@ -345,7 +345,7 @@ const LandingPage = () => {
               className={styles.collapsibleToggle}
               aria-expanded={expandedSections.terms || false}
               aria-controls="terms-content"
-              onClick={() => toggleCollapsible('terms')}
+              // onClick={() => toggleCollapsible('terms')}
             >
               Terms of Service
             </button>
@@ -389,9 +389,9 @@ const LandingPage = () => {
           <div className={styles.footerSection}>
             <h3>Quick Links</h3>
             <ul className={styles.footerLinks}>
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#privacy">Privacy Policy</a></li>
-              <li><a href="#terms">Terms of Service</a></li>
+              <li><a href="#abou">About Us</a></li>
+              <li><a href="#privac">Privacy Policy</a></li>
+              <li><a href="#term">Terms of Service</a></li>
             </ul>
           </div>
 
