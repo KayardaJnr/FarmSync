@@ -56,8 +56,8 @@ const MedicationLogPage = ({ data, db, userId }) => {
      
       <div className={styles.statsRow}>
         <StatCard title="Total Logs" value={data.logs.length} icon={Pill} color="blue" />
-        <StatCard title="Upcoming Vaccinations" value="2" icon={Calendar} color="yellow" />
-        <StatCard title="Active Treatments" value="1" icon={Activity} color="purple" />
+        <StatCard title="Upcoming Vaccinations" value="0" icon={Calendar} color="yellow" />
+        <StatCard title="Active Treatments" value="0" icon={Activity} color="purple" />
       </div>
      
       <DataTable 
