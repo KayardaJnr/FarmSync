@@ -85,6 +85,11 @@ nav {
   z-index: 1;
 }
 
+.heroImage img {
+  width: 90%;
+  height: auto;
+}
+
 .heroImage:empty {
   display: none;
 }

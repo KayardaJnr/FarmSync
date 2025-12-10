@@ -95,11 +95,16 @@
   margin-top: auto;
 }
 
-img {
+.logoImage {
   width: 100px;
   height: 65px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0  0 0 -20px;
+}
+
+.logoImage img {
+  width: 100%;
+  height: auto;
 }

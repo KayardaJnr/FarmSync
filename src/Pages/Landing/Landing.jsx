@@ -112,7 +112,7 @@ const LandingPage = () => {
             </div>
           </div>
           <div className={styles.heroImage}>
-            {/* <img src={heroImage} alt="Illustration of poultry farm management" onError={(e) => e.target.style.display='none'} /> */}
+            <img src={heroImage} alt="Illustration of poultry farm management" onError={(e) => e.target.style.display='none'} />
           </div>
         </div>
       </header>

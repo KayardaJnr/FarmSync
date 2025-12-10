@@ -6,7 +6,9 @@ import styles from './Sidebar.module.css';
 const Sidebar = ({ menuItems, unreadCount, onLogout }) => (
   <div className={styles.sidebar}>
     <div className={styles.header}>
+    <div className={styles.logoImage}>
         <img src="src/assets/Barn.png" alt="FarmSync Logo" />
+    </div>
       <div className={styles.logo}>
         <span className={styles.logoText}>FarmSync</span>
         <span className={styles.logoSubtext}>Poultry Management System</span>
