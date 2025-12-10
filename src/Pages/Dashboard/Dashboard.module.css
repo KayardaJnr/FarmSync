@@ -46,6 +46,8 @@
 
 .chartCard {
   height: 384px;
+  min-width: 0;
+  min-height: 0;
 }
 
 .cardTitle {
