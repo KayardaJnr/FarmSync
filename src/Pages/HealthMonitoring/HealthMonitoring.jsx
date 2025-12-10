@@ -10,7 +10,7 @@ const HealthMonitoringPage = ({ data }) => (
     <div className={styles.statsRow}>
       <StatCard title="Overall Health" value="Good" icon={ShieldCheck} color="green" />
       <StatCard title="Active Sickness" value={`${data.dailySummary.sick} Birds`} icon={HeartPulse} color="red" />
-      <StatCard title="Avg. Mortality Rate" value="0.2%" icon={TrendingDown} color="blue" />
+      <StatCard title="Avg. Mortality Rate" value="0%" icon={TrendingDown} color="blue" />
     </div>
    
     <div className={styles.card}>
