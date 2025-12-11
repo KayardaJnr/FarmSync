@@ -137,6 +137,7 @@ const LoginPage = () => {
             </button>
 
             <div className={styles.logoSection}>
+            <img src="src/assets/file.svg" alt="login logo" />
               <h1 className={styles.logo}>FarmSync</h1>
             </div>
 
@@ -174,6 +175,7 @@ const LoginPage = () => {
       <div className={styles.wrapper}>
         <div className={styles.card}>
           <div className={styles.logoSection}>
+            <img src="src/assets/file.svg" alt="login logo" />
             <h1 className={styles.logo}>FarmSync</h1>
           </div>
 

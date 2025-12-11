@@ -4,7 +4,8 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  background-color: #F9FAFB;
+  /* background: url('/src/assets/Farmbarn.png'); */
+  /* background-size: cover; */
 }
 
 .wrapper {
@@ -19,6 +20,7 @@
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
   border: 1px solid #E5E7EB;
   padding: 32px;
+  margin: -30px;
 }
 
 .logoSection {
@@ -26,7 +28,16 @@
   justify-content: center;
   align-items: center;
   gap: 12px;
-  margin-bottom: 32px;
+  margin-bottom: 10px;
+}
+
+.logoSection img {
+  height: 65px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0 -15px 0 0;
 }
 
 .logo {
