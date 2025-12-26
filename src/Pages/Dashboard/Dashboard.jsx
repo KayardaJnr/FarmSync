@@ -40,7 +40,7 @@ const DashboardPage = ({ data, setActiveNav }) => {
         {/* Left Column */}
         <div className={styles.leftColumn}>
           {/* Quick Actions */}
-          <div className={styles.card}>
+          {/* <div className={styles.card}>
             <h3 className={styles.cardTitle}>Quick Actions</h3>
             <div className={styles.actionsList}>
               {[
@@ -62,7 +62,7 @@ const DashboardPage = ({ data, setActiveNav }) => {
                 );
               })}
             </div>
-          </div>
+          </div> */}
          
           {/* Batch Health */}
           <div className={styles.card}>

@@ -29,14 +29,16 @@ const TopBar = ({ user, unreadCount, onLogout }) => {
 
   const handleProfileClick = () => {
     setShowUserMenu(false);
+    navigate('/profile');
     // TODO: Navigate to profile page when created
-    alert('Profile page coming soon!');
+    // alert('Profile page coming soon!');
   };
 
   const handleSettingsClick = () => {
     setShowUserMenu(false);
+    navigate('/settings');
     // TODO: Navigate to settings page when created
-    alert('Settings page coming soon!');
+    // alert('Settings page coming soon!');
   };
 
   const handleLogoutClick = () => {

@@ -4,8 +4,9 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  /* background: url('/src/assets/Farmbarn.png'); */
-  /* background-size: cover; */
+  background: url('/src/assets/bg.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .wrapper {

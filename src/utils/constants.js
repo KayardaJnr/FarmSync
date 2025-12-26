@@ -15,8 +15,8 @@ export const MENU_ITEMS = [
 
 export const INITIAL_DATA = {
   stats: {
-    totalBirds: 5000,
-    sales: 450000,
+    totalBirds: 0,
+    sales: 0,
     sick: 0,
     mortality: 0,
     totalExpenses: 0,
