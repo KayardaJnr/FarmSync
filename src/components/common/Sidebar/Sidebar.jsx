@@ -3,8 +3,11 @@ import { NavLink } from 'react-router-dom';
 import { LogOut } from 'lucide-react';
 import styles from './Sidebar.module.css';
 
-const Sidebar = ({ menuItems, unreadCount, onLogout }) => (
-  <div className={styles.sidebar}>
+const Sidebar = ({ menuItems, unreadCount, onLogout, isCollapsed, setIsCollapsed }) => {
+  const open = !isCollapsed;
+  return (
+    <>
+      <div className={`${styles.sidebar} ${open ? styles.open : styles.collapsed}`}>
     <div className={styles.header}>
     <div className={styles.logoImage}>
         <img src="src/assets/Barn.png" alt="FarmSync Logo" />
@@ -24,6 +27,7 @@ const Sidebar = ({ menuItems, unreadCount, onLogout }) => (
           <NavLink
             key={item.path}
             to={item.path}
+            onClick={() => setIsCollapsed && setIsCollapsed(true)}
             className={({ isActive }) =>
               `${styles.navItem} ${isActive ? styles.active : ''}`
             }
@@ -37,14 +41,23 @@ const Sidebar = ({ menuItems, unreadCount, onLogout }) => (
       })}
 
       <button
-        onClick={onLogout}
+        onClick={() => {
+          setIsCollapsed && setIsCollapsed(true);
+          onLogout && onLogout();
+        }}
         className={`${styles.navItem} ${styles.logout}`}
       >
         <LogOut size={18} />
         <span className={styles.navLabel}>Logout</span>
       </button>
     </nav>
-  </div>
-);
+      </div>
+      <div
+        className={styles.overlay}
+        onClick={() => setIsCollapsed && setIsCollapsed(true)}
+      />
+    </>
+  );
+};
 
 export default Sidebar;

@@ -19,3 +19,20 @@
   overflow: hidden;
   background-color: #F9FAFB;
 }
+
+@media (max-width: 768px) {
+  .layout {
+    /* allow sidebar overlay */
+    position: relative;
+    height: 100vh;
+  }
+
+  .mainContent {
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  .content {
+    padding: 16px;
+  }
+}

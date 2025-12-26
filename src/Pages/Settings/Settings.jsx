@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Settings as SettingsIcon, Bell, Lock, Palette, Database, Shield } from 'lucide-react';
-// import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import styles from './Settings.module.css';
 
 const SettingsPage = () => {
@@ -72,6 +72,8 @@ const SettingsPage = () => {
               <label className={styles.toggle}>
                 <input
                   type="checkbox"
+                  name="emailNotifications"
+                  id="emailNotifications"
                   checked={settings.emailNotifications}
                   onChange={() => handleToggle('emailNotifications')}
                 />
@@ -87,6 +89,8 @@ const SettingsPage = () => {
               <label className={styles.toggle}>
                 <input
                   type="checkbox"
+                  name="pushNotifications"
+                  id="pushNotifications"
                   checked={settings.pushNotifications}
                   onChange={() => handleToggle('pushNotifications')}
                 />
@@ -102,6 +106,8 @@ const SettingsPage = () => {
               <label className={styles.toggle}>
                 <input
                   type="checkbox"
+                  name="smsNotifications"
+                  id="smsNotifications"
                   checked={settings.smsNotifications}
                   onChange={() => handleToggle('smsNotifications')}
                 />
@@ -117,6 +123,8 @@ const SettingsPage = () => {
               <label className={styles.toggle}>
                 <input
                   type="checkbox"
+                  name="weeklyReports"
+                  id="weeklyReports"
                   checked={settings.weeklyReports}
                   onChange={() => handleToggle('weeklyReports')}
                 />
@@ -132,6 +140,8 @@ const SettingsPage = () => {
               <label className={styles.toggle}>
                 <input
                   type="checkbox"
+                  name="criticalAlerts"
+                  id="criticalAlerts"
                   checked={settings.criticalAlerts}
                   onChange={() => handleToggle('criticalAlerts')}
                 />
@@ -154,6 +164,8 @@ const SettingsPage = () => {
                 <div className={styles.settingDescription}>Choose your preferred theme</div>
               </div>
               <select
+                name="theme"
+                id="theme"
                 value={settings.theme}
                 onChange={(e) => handleSelect('theme', e.target.value)}
                 className={styles.select}
@@ -170,6 +182,8 @@ const SettingsPage = () => {
                 <div className={styles.settingDescription}>Select your language</div>
               </div>
               <select
+                name="language"
+                id="language"
                 value={settings.language}
                 onChange={(e) => handleSelect('language', e.target.value)}
                 className={styles.select}
@@ -216,6 +230,8 @@ const SettingsPage = () => {
                 <label className={styles.toggle}>
                   <input
                     type="checkbox"
+                    name="autoBackup"
+                    id="autoBackup"
                     checked={settings.autoBackup}
                     onChange={() => handleToggle('autoBackup')}
                   />
@@ -229,6 +245,8 @@ const SettingsPage = () => {
                   <div className={styles.settingDescription}>How often to backup data</div>
                 </div>
                 <select
+                  name="backupFrequency"
+                  id="backupFrequency"
                   value={settings.backupFrequency}
                   onChange={(e) => handleSelect('backupFrequency', e.target.value)}
                   className={styles.select}

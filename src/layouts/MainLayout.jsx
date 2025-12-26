@@ -22,7 +22,13 @@ const MainLayout = ({
         onLogout={onLogout}
       />
       <div className={styles.mainContent}>
-        <TopBar user={user} unreadCount={unreadCount} onLogout={onLogout} />
+        <TopBar
+          user={user}
+          unreadCount={unreadCount}
+          onLogout={onLogout}
+          isCollapsed={isCollapsed}
+          setIsCollapsed={setIsCollapsed}
+        />
         <div className={styles.content}>
           <Outlet />
         </div>

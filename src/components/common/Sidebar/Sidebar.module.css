@@ -8,6 +8,15 @@
   flex-shrink: 0;
 }
 
+.collapsed {
+  /* Desktop collapsed state */
+  width: 72px;
+}
+
+.open {
+  /* explicit open state for mobile */
+}
+
 .header {
   padding: 16px;
   height: 92px;
@@ -107,4 +116,55 @@
 .logoImage img {
   width: 100%;
   height: auto;
+}
+
+/* Mobile behavior */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    width: 260px;
+    z-index: 40;
+    transition: transform 0.25s ease-in-out;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .overlay {
+    display: none;
+  }
+
+  .sidebar.open + .overlay {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 30;
+  }
+
+  .logoText, .logoSubtext, .navLabel {
+    display: block;
+  }
+}
+
+/* Desktop collapsed: hide labels */
+@media (min-width: 769px) {
+  .collapsed .logoText,
+  .collapsed .logoSubtext,
+  .collapsed .navLabel {
+    display: none;
+  }
+
+  .collapsed {
+    width: 72px;
+  }
 }

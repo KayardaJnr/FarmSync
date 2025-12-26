@@ -12,6 +12,20 @@
   flex-shrink: 0;
 }
 
+.menuButton {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  color: #374151;
+  cursor: pointer;
+}
+
 .searchSection {
   flex: 1;
   max-width: 600px;
@@ -296,5 +310,11 @@
 
   .userInfo {
     display: none;
+  }
+  .menuButton {
+    display: inline-flex;
+  }
+  .rightSection {
+    gap: 8px;
   }
 }

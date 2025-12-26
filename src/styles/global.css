@@ -47,3 +47,31 @@ input, textarea, select {
 ::-webkit-scrollbar-thumb:hover {
   background: #a1a1a1;
 }
+
+/* Responsive variables and helpers */
+:root {
+  --container-padding: 32px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+}
+
+.app-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --container-padding: 16px;
+  }
+
+  html, body, #root {
+    height: auto;
+  }
+
+  .app-container {
+    padding: 0 16px;
+  }
+}

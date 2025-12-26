@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
-import { Search, Bell, User, ChevronDown, Settings, LogOut as LogOutIcon } from 'lucide-react';
+import { Search, Bell, User, ChevronDown, Settings, LogOut as LogOutIcon, Menu } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import useClickOutside from '../../../hooks/useClickOutside';
 import styles from './TopBar.module.css';
 
-const TopBar = ({ user, unreadCount, onLogout }) => {
+const TopBar = ({ user, unreadCount, onLogout, isCollapsed, setIsCollapsed }) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const userMenuRef = useRef(null);
@@ -66,16 +66,26 @@ const TopBar = ({ user, unreadCount, onLogout }) => {
 
   return (
     <div className={styles.topBar}>
+      <button
+        className={styles.menuButton}
+        onClick={() => setIsCollapsed && setIsCollapsed((s) => !s)}
+        aria-label="Toggle menu"
+      >
+        <Menu size={20} />
+      </button>
       {/* Search Bar */}
       <div className={styles.searchSection}>
         <form onSubmit={handleSearch} className={styles.searchForm}>
           <Search size={20} className={styles.searchIcon} />
           <input
+            id="global-search"
+            name="globalSearch"
             type="text"
             placeholder="Search batches, inventory, records..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className={styles.searchInput}
+            autoComplete="off"
           />
           {searchQuery && (
             <button 

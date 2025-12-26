@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { User, Mail, Shield, Calendar, Save, Edit2, Camera } from 'lucide-react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { updateProfile } from 'firebase/auth';
-// import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
+import { db } from '../../services/firebase';
 import styles from './Profile.module.css';
 
-const ProfilePage = ({ db }) => {
+const ProfilePage = () => {
   const { user, userRole, getRoleLabel } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -207,6 +208,8 @@ const ProfilePage = ({ db }) => {
               <div className={styles.formGroup}>
                 <label>Full Name *</label>
                 <input
+                  id="fullName"
+                  name="fullName"
                   type="text"
                   value={editData.name}
                   onChange={(e) => setEditData({ ...editData, name: e.target.value })}
@@ -219,6 +222,8 @@ const ProfilePage = ({ db }) => {
               <div className={styles.formGroup}>
                 <label>Email Address</label>
                 <input
+                  id="email"
+                  name="email"
                   type="email"
                   value={profileData.email}
                   disabled
@@ -230,6 +235,8 @@ const ProfilePage = ({ db }) => {
               <div className={styles.formGroup}>
                 <label>Phone Number</label>
                 <input
+                  id="phone"
+                  name="phone"
                   type="tel"
                   value={editData.phone}
                   onChange={(e) => setEditData({ ...editData, phone: e.target.value })}
@@ -241,6 +248,8 @@ const ProfilePage = ({ db }) => {
               <div className={styles.formGroup}>
                 <label>Role</label>
                 <input
+                  id="role"
+                  name="role"
                   type="text"
                   value={getRoleLabel(profileData.role)}
                   disabled

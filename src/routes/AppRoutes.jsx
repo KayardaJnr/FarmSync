@@ -11,6 +11,8 @@ import SalesDistributionPage from '../pages/SalesDistribution/SalesDistribution'
 import AnalyticsDashboardPage from '../pages/AnalyticsDashboard/AnalyticsDashboard';
 import NotificationsAlertsPage from '../pages/NotificationsAlerts/NotificationsAlerts';
 import ReportsPage from '../pages/Reports/Reports';
+import ProfilePage from '../pages/Profile/Profile';
+import SettingsPage from '../pages/Settings/Settings';
 
 const AppRoutes = ({ data, db, userId }) => {
   return (
@@ -27,6 +29,8 @@ const AppRoutes = ({ data, db, userId }) => {
       <Route path="/analytics" element={<AnalyticsDashboardPage data={data} />} />
       <Route path="/reports" element={<ReportsPage data={data} />} />
       <Route path="/notifications" element={<NotificationsAlertsPage data={data} db={db} userId={userId} />} />
+      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/settings" element={<SettingsPage />} />
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   );

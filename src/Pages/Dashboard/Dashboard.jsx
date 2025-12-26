@@ -89,7 +89,7 @@ const DashboardPage = ({ data, setActiveNav }) => {
           <div className={`${styles.card} ${styles.chartCard}`}>
             <h3 className={styles.cardTitle}>Inventory Levels (Bags)</h3>
             {inventoryPieData.length > 0 ? (
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
                   <Pie 
                     data={inventoryPieData} 
@@ -148,7 +148,7 @@ const DashboardPage = ({ data, setActiveNav }) => {
           {/* Production Chart */}
           <div className={`${styles.card} ${styles.chartCard}`}>
             <h3 className={styles.cardTitle}>Production vs. Feed (Last 7 Days)</h3>
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height={300}>
               <BarChart data={productionData} margin={{ top: 5, right: 20, bottom: 20, left: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
