@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { LogOut } from 'lucide-react';
 import styles from './Sidebar.module.css';
 
 const Sidebar = ({ menuItems, unreadCount, onLogout, isCollapsed, setIsCollapsed }) => {
-  const open = !isCollapsed;
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 769px)');
+    const handle = (e) => setIsDesktop(e.matches);
+    // set initial
+    setIsDesktop(mq.matches);
+    // listen for changes
+    if (mq.addEventListener) mq.addEventListener('change', handle);
+    else mq.addListener(handle);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', handle);
+      else mq.removeListener(handle);
+    };
+  }, []);
+
+  // On desktop always show sidebar (not collapsed). On mobile, use collapse state.
+  const open = isDesktop ? true : !isCollapsed;
   return (
     <>
       <div className={`${styles.sidebar} ${open ? styles.open : styles.collapsed}`}>
@@ -52,12 +69,15 @@ const Sidebar = ({ menuItems, unreadCount, onLogout, isCollapsed, setIsCollapsed
       </button>
     </nav>
       </div>
-      <div
-        className={styles.overlay}
-        onClick={() => setIsCollapsed && setIsCollapsed(true)}
-      />
+      {/* overlay only meaningful on mobile when sidebar is open */}
+      {!isDesktop && (
+        <div
+          className={styles.overlay}
+          onClick={() => setIsCollapsed && setIsCollapsed(true)}
+        />
+      )}
     </>
   );
 };
 
-export default Sidebar;
+export default React.memo(Sidebar);

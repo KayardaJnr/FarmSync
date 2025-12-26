@@ -1,10 +1,23 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Search, Bell, User, ChevronDown, Settings, LogOut as LogOutIcon, Menu } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import useClickOutside from '../../../hooks/useClickOutside';
 import styles from './TopBar.module.css';
 
 const TopBar = ({ user, unreadCount, onLogout, isCollapsed, setIsCollapsed }) => {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 769px)');
+    const handle = (e) => setIsDesktop(e.matches);
+    setIsDesktop(mq.matches);
+    if (mq.addEventListener) mq.addEventListener('change', handle);
+    else mq.addListener(handle);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', handle);
+      else mq.removeListener(handle);
+    };
+  }, []);
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const userMenuRef = useRef(null);
@@ -66,13 +79,15 @@ const TopBar = ({ user, unreadCount, onLogout, isCollapsed, setIsCollapsed }) =>
 
   return (
     <div className={styles.topBar}>
-      <button
-        className={styles.menuButton}
-        onClick={() => setIsCollapsed && setIsCollapsed((s) => !s)}
-        aria-label="Toggle menu"
-      >
-        <Menu size={20} />
-      </button>
+      {!isDesktop && (
+        <button
+          className={styles.menuButton}
+          onClick={() => setIsCollapsed && setIsCollapsed((s) => !s)}
+          aria-label="Toggle menu"
+        >
+          <Menu size={20} />
+        </button>
+      )}
       {/* Search Bar */}
       <div className={styles.searchSection}>
         <form onSubmit={handleSearch} className={styles.searchForm}>
@@ -186,4 +201,4 @@ const TopBar = ({ user, unreadCount, onLogout, isCollapsed, setIsCollapsed }) =>
   );
 };
 
-export default TopBar;
+export default React.memo(TopBar);

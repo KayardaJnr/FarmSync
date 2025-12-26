@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Home, PlusCircle, Package, Pill, Warehouse, HeartPulse, DollarSign, ShoppingCart, BarChart3, Bell, FileText } from 'lucide-react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
@@ -19,7 +19,7 @@ function App() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [data, setData] = useState(INITIAL_DATA);
 
-const menuItems = [
+const menuItems = useMemo(() => [
   { label: 'Dashboard', icon: Home, path: '/dashboard' },
   { label: 'Quick Entry', icon: PlusCircle, path: '/quick-entry' },
   { label: 'Batch Management', icon: Package, path: '/batch-management' },
@@ -31,7 +31,7 @@ const menuItems = [
   { label: 'Analytics', icon: BarChart3, path: '/analytics' },
   { label: 'Reports', icon: FileText, path: '/reports' }, 
   { label: 'Notifications', icon: Bell, path: '/notifications' },
-];
+], []);
   // Auth listener
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
