@@ -26,4 +26,4 @@ const DataTable = ({ columns, data }) => (
   </div>
 );
 
-export default DataTable;
+export default React.memo(DataTable);

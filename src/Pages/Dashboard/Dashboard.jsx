@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Bird, Package, HeartPulse, DollarSign, PlusCircle, Search, AlertCircle, AlertTriangle, Info, Skull } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import StatCard from '../../components/common/StatCard/StatCard';
 import styles from './Dashboard.module.css';
 
@@ -21,6 +20,16 @@ const DashboardPage = ({ data, setActiveNav }) => {
     { name: 'Sat', Crates: 61, Bags: 24 },
     { name: 'Sun', Crates: 60, Bags: 22 },
   ];
+
+  const [Recharts, setRecharts] = useState(null);
+
+  useEffect(() => {
+    let mounted = true;
+    import('recharts').then((mod) => {
+      if (mounted) setRecharts(mod);
+    }).catch((err) => console.error('Failed to load charts', err));
+    return () => { mounted = false; };
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -89,26 +98,30 @@ const DashboardPage = ({ data, setActiveNav }) => {
           <div className={`${styles.card} ${styles.chartCard}`}>
             <h3 className={styles.cardTitle}>Inventory Levels (Bags)</h3>
             {inventoryPieData.length > 0 ? (
-              <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                  <Pie 
-                    data={inventoryPieData} 
-                    cx="50%" 
-                    cy="50%" 
-                    labelLine={false} 
-                    outerRadius={100} 
-                    fill="#8884d8" 
-                    dataKey="value" 
-                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                  >
-                    {inventoryPieData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip formatter={(val) => `${val} bags`} />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
+                Recharts ? (
+                  <Recharts.ResponsiveContainer width="100%" height={300}>
+                    <Recharts.PieChart>
+                      <Recharts.Pie 
+                        data={inventoryPieData} 
+                        cx="50%" 
+                        cy="50%" 
+                        labelLine={false} 
+                        outerRadius={100} 
+                        fill="#8884d8" 
+                        dataKey="value" 
+                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                      >
+                        {inventoryPieData.map((entry, index) => (
+                          <Recharts.Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                      </Recharts.Pie>
+                      <Recharts.Tooltip formatter={(val) => `${val} bags`} />
+                      <Recharts.Legend />
+                    </Recharts.PieChart>
+                  </Recharts.ResponsiveContainer>
+                ) : (
+                  <div className={styles.emptyChart}>Loading chart...</div>
+                )
             ) : (
               <div className={styles.emptyChart}>No inventory data (bags)</div>
             )}
@@ -148,17 +161,21 @@ const DashboardPage = ({ data, setActiveNav }) => {
           {/* Production Chart */}
           <div className={`${styles.card} ${styles.chartCard}`}>
             <h3 className={styles.cardTitle}>Production vs. Feed (Last 7 Days)</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={productionData} margin={{ top: 5, right: 20, bottom: 20, left: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="Crates" fill="#1D9E53" />
-                <Bar dataKey="Bags" fill="#FFBB28" />
-              </BarChart>
-            </ResponsiveContainer>
+            {Recharts ? (
+              <Recharts.ResponsiveContainer width="100%" height={300}>
+                <Recharts.BarChart data={productionData} margin={{ top: 5, right: 20, bottom: 20, left: 0 }}>
+                  <Recharts.CartesianGrid strokeDasharray="3 3" />
+                  <Recharts.XAxis dataKey="name" />
+                  <Recharts.YAxis />
+                  <Recharts.Tooltip />
+                  <Recharts.Legend />
+                  <Recharts.Bar dataKey="Crates" fill="#1D9E53" />
+                  <Recharts.Bar dataKey="Bags" fill="#FFBB28" />
+                </Recharts.BarChart>
+              </Recharts.ResponsiveContainer>
+            ) : (
+              <div className={styles.emptyChart}>Loading chart...</div>
+            )}
           </div>
         </div>
       </div>

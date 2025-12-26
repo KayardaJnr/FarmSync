@@ -1,5 +1,4 @@
-import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
+import React, { useState, useEffect } from 'react';
 import styles from './AnalyticsDashboard.module.css';
 
 const AnalyticsDashboardPage = ({ data }) => {
@@ -35,6 +34,16 @@ const AnalyticsDashboardPage = ({ data }) => {
 
   const mortalityData = data.batches.map(b => ({ name: b.id, Mortality: b.mortality }));
 
+  const [Recharts, setRecharts] = useState(null);
+
+  useEffect(() => {
+    let mounted = true;
+    import('recharts').then((mod) => {
+      if (mounted) setRecharts(mod);
+    }).catch((err) => console.error('Failed to load charts', err));
+    return () => { mounted = false; };
+  }, []);
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Analytics Dashboard</h1>
@@ -42,71 +51,87 @@ const AnalyticsDashboardPage = ({ data }) => {
        
         <div className={styles.chartCard}>
           <h3 className={styles.chartTitle}>Production vs. Feed (Last 7 Days)</h3>
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={productionData} margin={{ top: 5, right: 20, bottom: 40, left: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="Crates" fill="#1D9E53" />
-              <Bar dataKey="Bags" fill="#FFBB28" />
-            </BarChart>
-          </ResponsiveContainer>
+          {Recharts ? (
+            <Recharts.ResponsiveContainer width="100%" height="100%">
+              <Recharts.BarChart data={productionData} margin={{ top: 5, right: 20, bottom: 40, left: 0 }}>
+                <Recharts.CartesianGrid strokeDasharray="3 3" />
+                <Recharts.XAxis dataKey="name" />
+                <Recharts.YAxis />
+                <Recharts.Tooltip />
+                <Recharts.Legend />
+                <Recharts.Bar dataKey="Crates" fill="#1D9E53" />
+                <Recharts.Bar dataKey="Bags" fill="#FFBB28" />
+              </Recharts.BarChart>
+            </Recharts.ResponsiveContainer>
+          ) : (
+            <div className={styles.loadingChart}>Loading chart...</div>
+          )}
         </div>
        
         <div className={styles.chartCard}>
           <h3 className={styles.chartTitle}>Profit & Loss Over Time</h3>
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={profitData} margin={{ top: 5, right: 20, bottom: 40, left: 10 }}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis tickFormatter={(val) => `₦${val/1000}k`} />
-              <Tooltip formatter={(val) => `₦${val.toLocaleString()}`} />
-              <Legend />
-              <Line type="monotone" dataKey="Sales" stroke="#1D9E53" strokeWidth={2} />
-              <Line type="monotone" dataKey="Expenses" stroke="#EF4444" strokeWidth={2} />
-              <Line type="monotone" dataKey="Profit" stroke="#3B82F6" strokeWidth={2} />
-            </LineChart>
-          </ResponsiveContainer>
+          {Recharts ? (
+            <Recharts.ResponsiveContainer width="100%" height="100%">
+              <Recharts.LineChart data={profitData} margin={{ top: 5, right: 20, bottom: 40, left: 10 }}>
+                <Recharts.CartesianGrid strokeDasharray="3 3" />
+                <Recharts.XAxis dataKey="name" />
+                <Recharts.YAxis tickFormatter={(val) => `₦${val/1000}k`} />
+                <Recharts.Tooltip formatter={(val) => `₦${val.toLocaleString()}`} />
+                <Recharts.Legend />
+                <Recharts.Line type="monotone" dataKey="Sales" stroke="#1D9E53" strokeWidth={2} />
+                <Recharts.Line type="monotone" dataKey="Expenses" stroke="#EF4444" strokeWidth={2} />
+                <Recharts.Line type="monotone" dataKey="Profit" stroke="#3B82F6" strokeWidth={2} />
+              </Recharts.LineChart>
+            </Recharts.ResponsiveContainer>
+          ) : (
+            <div className={styles.loadingChart}>Loading chart...</div>
+          )}
         </div>
        
         <div className={styles.chartCard}>
           <h3 className={styles.chartTitle}>Expense Breakdown</h3>
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie 
-                data={expenseData} 
-                cx="50%" 
-                cy="50%" 
-                labelLine={false} 
-                outerRadius={120} 
-                fill="#8884d8" 
-                dataKey="value" 
-                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-              >
-                {expenseData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip formatter={(val) => `₦${val.toLocaleString()}`} />
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
+          {Recharts ? (
+            <Recharts.ResponsiveContainer width="100%" height="100%">
+              <Recharts.PieChart>
+                <Recharts.Pie 
+                  data={expenseData} 
+                  cx="50%" 
+                  cy="50%" 
+                  labelLine={false} 
+                  outerRadius={120} 
+                  fill="#8884d8" 
+                  dataKey="value" 
+                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                >
+                  {expenseData.map((entry, index) => (
+                    <Recharts.Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Recharts.Pie>
+                <Recharts.Tooltip formatter={(val) => `₦${val.toLocaleString()}`} />
+                <Recharts.Legend />
+              </Recharts.PieChart>
+            </Recharts.ResponsiveContainer>
+          ) : (
+            <div className={styles.loadingChart}>Loading chart...</div>
+          )}
         </div>
        
         <div className={styles.chartCard}>
           <h3 className={styles.chartTitle}>Mortality Rate by Batch</h3>
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={mortalityData} margin={{ top: 5, right: 20, bottom: 40, left: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="Mortality" fill="#EF4444" />
-            </BarChart>
-          </ResponsiveContainer>
+          {Recharts ? (
+            <Recharts.ResponsiveContainer width="100%" height="100%">
+              <Recharts.BarChart data={mortalityData} margin={{ top: 5, right: 20, bottom: 40, left: 0 }}>
+                <Recharts.CartesianGrid strokeDasharray="3 3" />
+                <Recharts.XAxis dataKey="name" />
+                <Recharts.YAxis />
+                <Recharts.Tooltip />
+                <Recharts.Legend />
+                <Recharts.Bar dataKey="Mortality" fill="#EF4444" />
+              </Recharts.BarChart>
+            </Recharts.ResponsiveContainer>
+          ) : (
+            <div className={styles.loadingChart}>Loading chart...</div>
+          )}
         </div>
       </div>
     </div>

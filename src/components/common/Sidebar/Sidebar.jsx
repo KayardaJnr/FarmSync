@@ -27,7 +27,7 @@ const Sidebar = ({ menuItems, unreadCount, onLogout, isCollapsed, setIsCollapsed
       <div className={`${styles.sidebar} ${open ? styles.open : styles.collapsed}`}>
     <div className={styles.header}>
     <div className={styles.logoImage}>
-        <img src="/assets/Barn.png" alt="FarmSync Logo" />
+        <img loading="lazy" src="/assets/Barn.png" alt="FarmSync Logo" />
     </div>
       <div className={styles.logo}>
         <span className={styles.logoText}>FarmSync</span>

@@ -152,7 +152,7 @@ const ProfilePage = () => {
           <div className={styles.avatarSection}>
             <div className={styles.avatarWrapper}>
               {profileData.photoURL ? (
-                <img src={profileData.photoURL} alt="Profile" className={styles.avatar} />
+                <img loading="lazy" src={profileData.photoURL} alt="Profile" className={styles.avatar} />
               ) : (
                 <div className={styles.avatarPlaceholder}>
                   {getInitials()}

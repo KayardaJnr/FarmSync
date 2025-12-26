@@ -12,11 +12,6 @@ const LandingPage = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
-  const showModal = (message) => {
-    setModalMessage(message);
-    setModalVisible(true);
-  };
-
   const closeModal = () => {
     setModalVisible(false);
   };
@@ -113,7 +108,7 @@ const LandingPage = () => {
             </div>
           </div>
           <div className={styles.heroImage}>
-            <img src={heroImage} alt="Illustration of poultry farm management" onError={(e) => e.target.style.display='none'} />
+            <img loading="lazy" src={heroImage} alt="Illustration of poultry farm management" onError={(e) => e.target.style.display='none'} />
           </div>
         </div>
       </header>
