@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { collection, doc, addDoc, setDoc, increment } from 'firebase/firestore';
 import { Plus, DollarSign, Droplet, Bird, FileText, Package, Info, User } from 'lucide-react';
 import StatCard from '../../components/common/StatCard/StatCard';
 import DataTable from '../../components/common/DataTable/DataTable';

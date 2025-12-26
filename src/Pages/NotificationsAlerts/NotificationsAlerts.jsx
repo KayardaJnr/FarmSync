@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { Bell, AlertCircle, AlertTriangle, Info, CheckCircle, Trash2, Check, X } from 'lucide-react';
 import StatCard from '../../components/common/StatCard/StatCard';
 import styles from './NotificationsAlerts.module.css';

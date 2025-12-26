@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import DashboardPage from '../pages/Dashboard/Dashboard';
-import QuickEntryPage from '../pages/QuickEntry/QuickEntry';
-import BatchManagementPage from '../pages/BatchManagement/BatchManagement';
-import MedicationLogPage from '../pages/MedicationLog/MedicationLog';
-import InventoryManagementPage from '../pages/InventoryManagement/InventoryManagement';
-import HealthMonitoringPage from '../pages/HealthMonitoring/HealthMonitoring';
-import ExpenseProfitTrackingPage from '../pages/ExpenseProfitTracking/ExpenseProfitTracking';
-import SalesDistributionPage from '../pages/SalesDistribution/SalesDistribution';
-import AnalyticsDashboardPage from '../pages/AnalyticsDashboard/AnalyticsDashboard';
-import NotificationsAlertsPage from '../pages/NotificationsAlerts/NotificationsAlerts';
-import ReportsPage from '../pages/Reports/Reports';
-import ProfilePage from '../pages/Profile/Profile';
-import SettingsPage from '../pages/Settings/Settings';
+
+const DashboardPage = React.lazy(() => import('../Pages/Dashboard/Dashboard'));
+const QuickEntryPage = React.lazy(() => import('../Pages/QuickEntry/QuickEntry'));
+const BatchManagementPage = React.lazy(() => import('../Pages/BatchManagement/BatchManagement'));
+const MedicationLogPage = React.lazy(() => import('../Pages/MedicationLog/MedicationLog'));
+const InventoryManagementPage = React.lazy(() => import('../Pages/InventoryManagement/InventoryManagement'));
+const HealthMonitoringPage = React.lazy(() => import('../Pages/HealthMonitoring/HealthMonitoring'));
+const ExpenseProfitTrackingPage = React.lazy(() => import('../Pages/ExpenseProfitTracking/ExpenseProfitTracking'));
+const SalesDistributionPage = React.lazy(() => import('../Pages/SalesDistribution/SalesDistribution'));
+const AnalyticsDashboardPage = React.lazy(() => import('../Pages/AnalyticsDashboard/AnalyticsDashboard'));
+const NotificationsAlertsPage = React.lazy(() => import('../Pages/NotificationsAlerts/NotificationsAlerts'));
+const ReportsPage = React.lazy(() => import('../Pages/Reports/Reports'));
+const ProfilePage = React.lazy(() => import('../Pages/Profile/Profile'));
+const SettingsPage = React.lazy(() => import('../Pages/Settings/Settings'));
 
 const AppRoutes = ({ data, db, userId }) => {
   return (
-    <Routes>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
       <Route path="/dashboard" element={<DashboardPage data={data} />} />
       <Route path="/quick-entry" element={<QuickEntryPage data={data} db={db} userId={userId} />} />
@@ -32,7 +34,8 @@ const AppRoutes = ({ data, db, userId }) => {
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/settings" element={<SettingsPage />} />
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
-    </Routes>
+      </Routes>
+    </Suspense>
   );
 };
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { collection, addDoc } from 'firebase/firestore';
 import { Plus, Pill, Calendar, Activity, Search, Droplet, Info } from 'lucide-react';
 import StatCard from '../../components/common/StatCard/StatCard';
 import DataTable from '../../components/common/DataTable/DataTable';

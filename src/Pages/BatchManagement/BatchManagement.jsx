@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { doc, setDoc, increment } from 'firebase/firestore';
 import { PlusCircle, Search, Activity, Bird, HeartPulse, X, ShieldCheck, Scaling, Info } from 'lucide-react';
 import StatCard from '../../components/common/StatCard/StatCard';
 import Modal from '../../components/common/Modal/Modal';
