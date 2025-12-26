@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { Home, PlusCircle, Package, Pill, Warehouse, HeartPulse, DollarSign, ShoppingCart, BarChart3, Bell, FileText } from 'lucide-react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { doc, onSnapshot, collection, query } from 'firebase/firestore';
+import { doc, onSnapshot, collection, query, where } from 'firebase/firestore';
 import { auth, db } from './services/firebase';
 import MainLayout from "./layouts/MainLayout";
 import LandingPage from './Pages/Landing/Landing';
@@ -111,6 +111,31 @@ const menuItems = useMemo(() => [
       })
     );
 
+    // Aggregate today's daily_records as a fallback/real-time source of truth
+    try {
+      const recordsCol = collection(db, `artifacts/${APP_ID}/users/${user.uid}/daily_records`);
+      const start = new Date();
+      start.setHours(0, 0, 0, 0);
+      const end = new Date();
+      end.setHours(23, 59, 59, 999);
+      const recordsQuery = query(recordsCol, where('timestamp', '>=', start.getTime()), where('timestamp', '<=', end.getTime()));
+      unsubscribers.push(
+        onSnapshot(recordsQuery, (snapshot) => {
+          const totals = { eggs: 0, feed: 0, sick: 0, mortality: 0 };
+          snapshot.docs.forEach((d) => {
+            const docData = d.data() || {};
+            totals.eggs += Number(docData.crates || 0);
+            totals.feed += Number(docData.bags || 0);
+            totals.sick += Number(docData.sick || 0);
+            totals.mortality += Number(docData.mortality || 0);
+          });
+          setData((prev) => ({ ...prev, dailySummary: { ...prev.dailySummary, ...totals } }));
+        })
+      );
+    } catch (e) {
+      console.warn('Failed to set up daily_records listener', e);
+    }
+
     // Batches
     const batchesRef = collection(db, `artifacts/${APP_ID}/users/${user.uid}/batches`);
     unsubscribers.push(
@@ -212,7 +237,18 @@ if (!user) {
          />
        }
      >
-         <Route path="/*" element={<AppRoutes data={data} db={db} userId={user.uid} />} />
+         <Route path="/*" element={<AppRoutes data={data} db={db} userId={user.uid} updateDailySummary={(delta) => {
+           // delta: { eggs, feed, sick, mortality }
+           setData((prev) => ({
+             ...prev,
+             dailySummary: {
+               eggs: (Number(prev.dailySummary.eggs) || 0) + (Number(delta.eggs) || 0),
+               feed: (Number(prev.dailySummary.feed) || 0) + (Number(delta.feed) || 0),
+               sick: (Number(prev.dailySummary.sick) || 0) + (Number(delta.sick) || 0),
+               mortality: (Number(prev.dailySummary.mortality) || 0) + (Number(delta.mortality) || 0),
+             }
+           }));
+         }} />} />
        </Route>
     </Routes>
   );

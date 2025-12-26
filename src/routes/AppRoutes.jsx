@@ -15,13 +15,13 @@ const ReportsPage = React.lazy(() => import('../Pages/Reports/Reports'));
 const ProfilePage = React.lazy(() => import('../Pages/Profile/Profile'));
 const SettingsPage = React.lazy(() => import('../Pages/Settings/Settings'));
 
-const AppRoutes = ({ data, db, userId }) => {
+const AppRoutes = ({ data, db, userId, updateDailySummary }) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
       <Route path="/dashboard" element={<DashboardPage data={data} />} />
-      <Route path="/quick-entry" element={<QuickEntryPage data={data} db={db} userId={userId} />} />
+      <Route path="/quick-entry" element={<QuickEntryPage data={data} db={db} userId={userId} onSummaryUpdate={updateDailySummary} />} />
       <Route path="/batch-management" element={<BatchManagementPage batches={data.batches} db={db} userId={userId} />} />
       <Route path="/medication-log" element={<MedicationLogPage data={data} db={db} userId={userId} />} />
       <Route path="/inventory" element={<InventoryManagementPage data={data} db={db} userId={userId} />} />
