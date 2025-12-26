@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { Home, PlusCircle, Package, Pill, Warehouse, HeartPulse, DollarSign, ShoppingCart, BarChart3, Bell, FileText } from 'lucide-react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, onSnapshot, collection, query } from 'firebase/firestore';
@@ -40,6 +40,9 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [data, setData] = useState(DEFAULT_DATA);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const navigateRef = useRef(navigate);
 
 const menuItems = useMemo(() => [
   { label: 'Dashboard', icon: Home, path: '/dashboard' },
@@ -56,10 +59,29 @@ const menuItems = useMemo(() => [
 ], []);
   // Auth listener
   useEffect(() => {
+    const navigate = navigateRef.current || null;
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      // detect first-time login (previously null -> now user)
+      const wasLoggedOut = !user;
       setUser(currentUser);
       setLoading(false);
+
+      try {
+        // Only redirect on initial automatic login and on certain paths
+        if (currentUser && wasLoggedOut) {
+          const path = window.location.pathname;
+          if (path === '/' || path === '/login' || path === '/notifications') {
+            // use global history to navigate to dashboard
+            window.history.replaceState({}, '', '/dashboard');
+            // also trigger react-router navigation if available
+            if (navigateRef.current) navigateRef.current('/dashboard', { replace: true });
+          }
+        }
+      } catch (e) {
+        // ignore navigation errors
+      }
     });
+
     return () => unsubscribe();
   }, []);
 
