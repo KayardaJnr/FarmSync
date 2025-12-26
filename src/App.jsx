@@ -5,7 +5,7 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, onSnapshot, collection, query } from 'firebase/firestore';
 import { auth, db } from './services/firebase';
 import MainLayout from "./layouts/MainLayout";
-import LandingPage from './pages/Landing/Landing';
+import LandingPage from './Pages/Landing/Landing';
 import LoginPage from './Pages/Login/Login';
 import AppRoutes from './routes/AppRoutes';
 import { INITIAL_DATA } from './utils/constants';
