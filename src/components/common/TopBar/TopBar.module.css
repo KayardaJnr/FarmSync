@@ -302,6 +302,13 @@
 @media (max-width: 768px) {
   .topBar {
     padding: 0 16px;
+    /* Make the top bar fixed on mobile so it stays visible while scrolling */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 60;
   }
 
   .searchSection {
