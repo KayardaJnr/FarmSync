@@ -8,7 +8,29 @@ import MainLayout from "./layouts/MainLayout";
 import LandingPage from './Pages/Landing/Landing';
 import LoginPage from './Pages/Login/Login';
 import AppRoutes from './routes/AppRoutes';
-import { INITIAL_DATA } from './utils/constants';
+// Default app data shape used until Firestore snapshots populate real values
+const DEFAULT_DATA = {
+  stats: {
+    totalBirds: 0,
+    sales: 0,
+    sick: 0,
+    mortality: 0,
+    totalExpenses: 0,
+    totalSales: 0,
+  },
+  dailySummary: {
+    eggs: 0,
+    feed: 0,
+    sick: 0,
+    mortality: 0,
+  },
+  batches: [],
+  inventory: [],
+  logs: [],
+  expenses: [],
+  sales: [],
+  notifications: [],
+};
 import styles from './App.module.css';
 
 const APP_ID = 'farmsync-app';
@@ -17,7 +39,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [data, setData] = useState(INITIAL_DATA);
+  const [data, setData] = useState(DEFAULT_DATA);
 
 const menuItems = useMemo(() => [
   { label: 'Dashboard', icon: Home, path: '/dashboard' },
@@ -127,7 +149,7 @@ const menuItems = useMemo(() => [
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      setData(INITIAL_DATA);
+      setData(DEFAULT_DATA);
     } catch (error) {
       console.error('Error logging out:', error);
     }

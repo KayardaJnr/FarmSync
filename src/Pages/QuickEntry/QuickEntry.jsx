@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Droplet, Package, HeartPulse, X, Skull, Save, Clock } from 'lucide-react';
 import IconInput from '../../components/common/IconInput/IconInput';
 import FormMessage from '../../components/common/FormMessage/FormMessage';
-import { collection, doc, addDoc, setDoc, increment } from 'firebase/firestore';
+import { collection, doc, addDoc, setDoc, increment, getDoc } from 'firebase/firestore';
 import styles from './QuickEntry.module.css';
 
 const QuickEntryPage = ({ data, db, userId }) => {
@@ -10,6 +10,22 @@ const QuickEntryPage = ({ data, db, userId }) => {
   const [record, setRecord] = useState({ eggs: 0, feed: 0, sick: 0, mortality: 0 });
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [localSummary, setLocalSummary] = useState(null);
+
+  // Keep local optimistic summary in sync with remote snapshot
+  useEffect(() => {
+    if (data && data.dailySummary) {
+      setLocalSummary((prev) => {
+        if (!prev) return { ...data.dailySummary };
+        return {
+          eggs: Math.max(Number(prev.eggs || 0), Number(data.dailySummary.eggs || 0)),
+          feed: Math.max(Number(prev.feed || 0), Number(data.dailySummary.feed || 0)),
+          sick: Math.max(Number(prev.sick || 0), Number(data.dailySummary.sick || 0)),
+          mortality: Math.max(Number(prev.mortality || 0), Number(data.dailySummary.mortality || 0)),
+        };
+      });
+    }
+  }, [data.dailySummary]);
 
   const handleSave = async () => {
     if (!db || !userId || isLoading) return;
@@ -47,6 +63,22 @@ const QuickEntryPage = ({ data, db, userId }) => {
         mortality: increment(Number(record.mortality)),
       }, { merge: true });
 
+      // Read back the latest summary to ensure UI reflects saved totals
+      try {
+        const latest = await getDoc(summaryDocRef);
+        if (latest.exists()) {
+          const latestData = latest.data();
+          setLocalSummary({
+            eggs: Number(latestData.eggs || 0),
+            feed: Number(latestData.feed || 0),
+            sick: Number(latestData.sick || 0),
+            mortality: Number(latestData.mortality || 0),
+          });
+        }
+      } catch (e) {
+        console.warn('Could not read back summary after save', e);
+      }
+
       // 3. Update main stats
       const statsDocRef = doc(db, `artifacts/${appId}/users/${userId}/farm/stats`);
       await setDoc(statsDocRef, {
@@ -59,6 +91,17 @@ const QuickEntryPage = ({ data, db, userId }) => {
       
       // Reset form
       setRecord({ eggs: 0, feed: 0, sick: 0, mortality: 0 });
+
+      // Optimistically update local summary so user sees immediate change
+      setLocalSummary((prev) => {
+        const base = prev || data.dailySummary || {};
+        return {
+          eggs: (Number(base.eggs) || 0) + Number(record.eggs || 0),
+          feed: (Number(base.feed) || 0) + Number(record.feed || 0),
+          sick: (Number(base.sick) || 0) + Number(record.sick || 0),
+          mortality: (Number(base.mortality) || 0) + Number(record.mortality || 0),
+        };
+      });
 
     } catch (error) {
       console.error("Error saving record: ", error);
@@ -89,14 +132,17 @@ const QuickEntryPage = ({ data, db, userId }) => {
       <div className={styles.summary}>
         <h3 className={styles.summaryTitle}>Today's Total Summary</h3>
         <div className={styles.summaryGrid}>
-          {Object.entries(data.dailySummary).map(([key, val]) => (
+          {(() => {
+            const displaySummary = localSummary || data.dailySummary || {};
+            return Object.entries(displaySummary).map(([key, val]) => (
             <div key={key} className={styles.summaryCard}>
               <div className={styles.summaryLabel}>
                 {key === 'eggs' ? 'Crates' : key === 'feed' ? 'Bags' : key.charAt(0).toUpperCase() + key.slice(1)}
               </div>
               <div className={styles.summaryValue}>{val || 0}</div>
             </div>
-          ))}
+            ));
+          })()}
         </div>
       </div>
      
