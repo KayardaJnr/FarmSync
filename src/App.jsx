@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { Home, PlusCircle, Package, Pill, Warehouse, HeartPulse, DollarSign, ShoppingCart, BarChart3, Bell, FileText } from 'lucide-react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, onSnapshot, collection, query, where } from 'firebase/firestore';
@@ -38,10 +38,9 @@ const APP_ID = 'farmsync-app';
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [data, setData] = useState(DEFAULT_DATA);
   const navigate = useNavigate();
-  const location = useLocation();
   const navigateRef = useRef(navigate);
 
 const menuItems = useMemo(() => [
@@ -59,7 +58,6 @@ const menuItems = useMemo(() => [
 ], []);
   // Auth listener
   useEffect(() => {
-    const navigate = navigateRef.current || null;
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       // detect first-time login (previously null -> now user)
       const wasLoggedOut = !user;
@@ -77,13 +75,13 @@ const menuItems = useMemo(() => [
             if (navigateRef.current) navigateRef.current('/dashboard', { replace: true });
           }
         }
-      } catch (e) {
+      } catch {
         // ignore navigation errors
       }
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [user]);
 
   // Firestore listeners
   useEffect(() => {
