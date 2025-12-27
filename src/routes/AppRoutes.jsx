@@ -17,7 +17,6 @@ const SettingsPage = React.lazy(() => import('../Pages/Settings/Settings'));
 
 const AppRoutes = ({ data, db, userId, updateDailySummary }) => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
       <Routes>
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
       <Route path="/dashboard" element={<DashboardPage data={data} />} />
@@ -35,7 +34,6 @@ const AppRoutes = ({ data, db, userId, updateDailySummary }) => {
       <Route path="/settings" element={<SettingsPage />} />
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
-    </Suspense>
   );
 };
 
