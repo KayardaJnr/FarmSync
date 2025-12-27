@@ -320,7 +320,7 @@ const LandingPage = () => {
               className={styles.collapsibleToggle}
               aria-expanded={expandedSections.privacy || false}
               aria-controls="privacy-content"
-              // onClick={() => toggleCollapsible('privacy')}
+              onClick={() => toggleCollapsible('privacy')}
             >
               Privacy Policy
             </button>
@@ -341,7 +341,7 @@ const LandingPage = () => {
               className={styles.collapsibleToggle}
               aria-expanded={expandedSections.terms || false}
               aria-controls="terms-content"
-              // onClick={() => toggleCollapsible('terms')}
+              onClick={() => toggleCollapsible('terms')}
             >
               Terms of Service
             </button>
