@@ -80,7 +80,7 @@ const menuItems = useMemo(() => [
     //   }
     // });
 
-    // return () => unsubscribe();
+    return () => unsubscribe();
   }, [user]);
 
   // Firestore listeners
