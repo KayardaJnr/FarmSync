@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// Media moved to public/assets for smaller JS bundles
+
 const demoVideo = '/assets/intro.mp4';
 const heroImage = '/assets/Farmbarn.png';
 import styles from './Landing.module.css';
