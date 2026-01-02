@@ -81,7 +81,7 @@ const menuItems = useMemo(() => [
     // });
 
     // return () => unsubscribe();
-  }, []);
+  }, [user]);
 
   // Firestore listeners
   useEffect(() => {
