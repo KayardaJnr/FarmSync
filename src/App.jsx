@@ -60,25 +60,25 @@ const menuItems = useMemo(() => [
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       // detect first-time login (previously null -> now user)
-      // const wasLoggedOut = !user;
+      const wasLoggedOut = !user;
       setUser(currentUser);
       setLoading(false);
 
-    //   try {
-    //     // Only redirect on initial automatic login and on certain paths
-    //     if (currentUser && wasLoggedOut) {
-    //       const path = window.location.pathname;
-    //       if (path === '/' || path === '/login' || path === '/notifications') {
-    //         // use global history to navigate to dashboard
-    //         window.history.replaceState({}, '', '/dashboard');
-    //         // also trigger react-router navigation if available
-    //         if (navigateRef.current) navigateRef.current('/dashboard', { replace: true });
-    //       }
-    //     }
-    //   } catch {
-    //     // ignore navigation errors
-    //   }
-    // });
+      try {
+        // Only redirect on initial automatic login and on certain paths
+        if (currentUser && wasLoggedOut) {
+          const path = window.location.pathname;
+          if (path === '/' || path === '/login' || path === '/notifications') {
+            // use global history to navigate to dashboard
+            window.history.replaceState({}, '', '/dashboard');
+            // also trigger react-router navigation if available
+            if (navigateRef.current) navigateRef.current('/dashboard', { replace: true });
+          }
+        }
+      } catch {
+        // ignore navigation errors
+      }
+    });
 
     return () => unsubscribe();
   }, [user]);
