@@ -27,6 +27,7 @@ button {
 
 input, textarea, select {
   font-family: inherit;
+  font-size: 16px;
 }
 
 /* Scrollbar styling */
