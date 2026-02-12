@@ -127,7 +127,7 @@
     bottom: 0;
     transform: translateX(-100%);
     width: 260px;
-    z-index: 40;
+    z-index: 1000;
     transition: transform 0.25s ease-in-out;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   }
@@ -148,7 +148,7 @@
     right: 0;
     bottom: 0;
     background: rgba(0,0,0,0.4);
-    z-index: 30;
+    z-index: 999;
   }
 
   .logoText, .logoSubtext, .navLabel {

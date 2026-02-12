@@ -198,3 +198,194 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+@media (max-width: 768px) {
+  .container {
+    height: auto;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .wrapper {
+    max-width: 100%;
+    padding: 20px 16px;
+  }
+
+  .card {
+    padding: 24px;
+    margin: -20px;
+    border-radius: 12px;
+  }
+
+  .logoSection {
+    margin-bottom: 16px;
+    gap: 10px;
+  }
+
+  .logoSection img {
+    height: 55px;
+    margin: 0 -12px 0 0;
+  }
+
+  .logo {
+    font-size: 28px;
+  }
+
+  .title {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .form {
+    gap: 16px;
+  }
+
+  .submitButton,
+  .googleButton {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .divider {
+    margin: 20px 0;
+  }
+
+  .dividerText {
+    font-size: 13px;
+  }
+
+  .switchMode {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+
+  .backButton {
+    padding: 6px 10px;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+
+  .wrapper {
+    padding: 12px;
+  }
+
+  .card {
+    padding: 20px;
+    margin: -12px;
+  }
+
+  .logoSection {
+    margin-bottom: 14px;
+  }
+
+  .logoSection img {
+    height: 48px;
+    margin: 0 -10px 0 0;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  .form {
+    gap: 14px;
+  }
+
+  .forgotPassword {
+    margin-top: 6px;
+  }
+
+  .forgotPassword button {
+    font-size: 13px;
+  }
+
+  .submitButton,
+  .googleButton {
+    padding: 11px;
+    font-size: 14px;
+  }
+
+  .googleIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .divider {
+    margin: 18px 0;
+  }
+
+  .dividerText {
+    margin: 0 12px;
+    font-size: 12px;
+  }
+
+  .switchMode {
+    margin-top: 16px;
+    font-size: 13px;
+  }
+
+  .backButton {
+    padding: 5px 8px;
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding: 10px;
+  }
+
+  .wrapper {
+    padding: 10px;
+  }
+
+  .card {
+    padding: 16px;
+    margin: -10px;
+  }
+
+  .logoSection img {
+    height: 44px;
+    margin: 0 -8px 0 0;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .submitButton,
+  .googleButton {
+    padding: 10px;
+    font-size: 13px;
+  }
+}
