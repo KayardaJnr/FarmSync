@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { User, Mail, Shield, Calendar, Save, Edit2, Camera } from 'lucide-react';
+import { User, Mail, Shield, Calendar, Save, Edit2, Camera, Activity, Lock, LogOut } from 'lucide-react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { updateProfile } from 'firebase/auth';
+import { updateProfile, signOut } from 'firebase/auth';
 import { useAuth } from '../../context/AuthContext';
-import { db } from '../../services/firebase';
+import { db, auth } from '../../services/firebase';
 import styles from './Profile.module.css';
 
 const ProfilePage = () => {
@@ -18,11 +18,15 @@ const ProfilePage = () => {
     phone: '',
     role: '',
     createdAt: '',
-    photoURL: ''
+    photoURL: '',
+    farmName: '',
+    farmLocation: ''
   });
   const [editData, setEditData] = useState({
     name: '',
-    phone: ''
+    phone: '',
+    farmName: '',
+    farmLocation: ''
   });
 
   useEffect(() => {
@@ -44,12 +48,16 @@ const ProfilePage = () => {
           phone: data.phone || '',
           role: data.role || 'room-attendant',
           createdAt: data.createdAt || '',
-          photoURL: user.photoURL || ''
+          photoURL: user.photoURL || '',
+          farmName: data.farmName || 'Main Farm',
+          farmLocation: data.farmLocation || 'Not specified'
         };
         setProfileData(profile);
         setEditData({
           name: profile.name,
-          phone: profile.phone
+          phone: profile.phone,
+          farmName: profile.farmName,
+          farmLocation: profile.farmLocation
         });
       }
     } catch (error) {
@@ -70,6 +78,8 @@ const ProfilePage = () => {
       await updateDoc(doc(db, 'users', user.uid), {
         name: editData.name,
         phone: editData.phone,
+        farmName: editData.farmName,
+        farmLocation: editData.farmLocation,
         updatedAt: new Date().toISOString()
       });
 
@@ -81,7 +91,9 @@ const ProfilePage = () => {
       setProfileData({
         ...profileData,
         name: editData.name,
-        phone: editData.phone
+        phone: editData.phone,
+        farmName: editData.farmName,
+        farmLocation: editData.farmLocation
       });
 
       setMessage({ type: 'success', text: '✓ Profile updated successfully!' });
@@ -99,10 +111,21 @@ const ProfilePage = () => {
   const handleCancel = () => {
     setEditData({
       name: profileData.name,
-      phone: profileData.phone
+      phone: profileData.phone,
+      farmName: profileData.farmName,
+      farmLocation: profileData.farmLocation
     });
     setIsEditing(false);
     setMessage(null);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error('Error logging out:', error);
+      setMessage({ type: 'error', text: 'Failed to logout' });
+    }
   };
 
   const getInitials = () => {
@@ -197,126 +220,110 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        {/* Edit Form */}
+        {/* Farm Information */}
         <div className={styles.card}>
-          <h3 className={styles.cardTitle}>
-            {isEditing ? 'Edit Information' : 'Personal Information'}
-          </h3>
-
-          {isEditing ? (
-            <form onSubmit={handleSave} className={styles.form}>
-              <div className={styles.formGroup}>
-                <label>Full Name *</label>
-                <input
-                  id="fullName"
-                  name="fullName"
-                  type="text"
-                  value={editData.name}
-                  onChange={(e) => setEditData({ ...editData, name: e.target.value })}
-                  required
-                  placeholder="Enter your full name"
-                  disabled={saving}
-                />
+          <div className={styles.cardTitle}>
+            <Activity size={20} className={styles.cardTitleIcon} />
+            <h3>Farm Information</h3>
+          </div>
+          {!isEditing ? (
+            <div className={styles.infoSection}>
+              <div className={styles.infoItem}>
+                <User size={18} className={styles.infoIcon} />
+                <div>
+                  <label>Farm Name</label>
+                  <p>{profileData.farmName}</p>
+                </div>
               </div>
-
-              <div className={styles.formGroup}>
-                <label>Email Address</label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={profileData.email}
-                  disabled
-                  className={styles.disabledInput}
-                />
-                <small>Email cannot be changed</small>
+              <div className={styles.infoItem}>
+                <Calendar size={18} className={styles.infoIcon} />
+                <div>
+                  <label>Location</label>
+                  <p>{profileData.farmLocation}</p>
+                </div>
               </div>
-
-              <div className={styles.formGroup}>
-                <label>Phone Number</label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  value={editData.phone}
-                  onChange={(e) => setEditData({ ...editData, phone: e.target.value })}
-                  placeholder="+234 xxx xxx xxxx"
-                  disabled={saving}
-                />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label>Role</label>
-                <input
-                  id="role"
-                  name="role"
-                  type="text"
-                  value={getRoleLabel(profileData.role)}
-                  disabled
-                  className={styles.disabledInput}
-                />
-                <small>Contact your administrator to change your role</small>
-              </div>
-
-              <div className={styles.formActions}>
-                <button 
-                  type="button" 
-                  onClick={handleCancel}
-                  className={styles.cancelButton}
-                  disabled={saving}
-                >
-                  Cancel
-                </button>
-                <button 
-                  type="submit" 
-                  className={styles.saveButton}
-                  disabled={saving}
-                >
-                  {saving ? (
-                    <>Saving...</>
-                  ) : (
-                    <>
-                      <Save size={18} />
-                      Save Changes
-                    </>
-                  )}
-                </button>
-              </div>
-            </form>
+            </div>
           ) : (
-            <div className={styles.infoList}>
-              <div className={styles.infoRow}>
-                <label>Full Name</label>
-                <p>{profileData.name || 'Not set'}</p>
+            <div className={styles.formSection}>
+              <div className={styles.formGroup}>
+                <label>Farm Name</label>
+                <input
+                  type="text"
+                  value={editData.farmName}
+                  onChange={(e) => setEditData({...editData, farmName: e.target.value})}
+                  className={styles.input}
+                />
               </div>
-              <div className={styles.infoRow}>
-                <label>Email Address</label>
-                <p>{profileData.email}</p>
-              </div>
-              <div className={styles.infoRow}>
-                <label>Phone Number</label>
-                <p>{profileData.phone || 'Not set'}</p>
-              </div>
-              <div className={styles.infoRow}>
-                <label>Role</label>
-                <p>{getRoleLabel(profileData.role)}</p>
+              <div className={styles.formGroup}>
+                <label>Location</label>
+                <input
+                  type="text"
+                  value={editData.farmLocation}
+                  onChange={(e) => setEditData({...editData, farmLocation: e.target.value})}
+                  className={styles.input}
+                />
               </div>
             </div>
           )}
         </div>
 
-        {/* Account Stats */}
+        {/* Edit Form */}
+        {isEditing && (
+          <div className={styles.card}>
+            <div className={styles.cardTitle}>
+              <Edit2 size={20} className={styles.cardTitleIcon} />
+              <h3>Edit Profile</h3>
+            </div>
+            <form onSubmit={handleSave} className={styles.form}>
+              <div className={styles.formGroup}>
+                <label>Full Name</label>
+                <input
+                  type="text"
+                  value={editData.name}
+                  onChange={(e) => setEditData({...editData, name: e.target.value})}
+                  className={styles.input}
+                  required
+                />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label>Phone Number</label>
+                <input
+                  type="tel"
+                  value={editData.phone}
+                  onChange={(e) => setEditData({...editData, phone: e.target.value})}
+                  className={styles.input}
+                />
+              </div>
+
+              <div className={styles.formActions}>
+                <button type="submit" disabled={saving} className={styles.button}>
+                  <Save size={18} />
+                  {saving ? 'Saving...' : 'Save Changes'}
+                </button>
+                <button type="button" onClick={handleCancel} className={styles.buttonSecondary}>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
+
+        {/* Security & Logout */}
         <div className={styles.card}>
-          <h3 className={styles.cardTitle}>Account Statistics</h3>
-          <div className={styles.statsGrid}>
-            <div className={styles.statCard}>
-              <div className={styles.statValue}>{formatDate(profileData.createdAt)}</div>
-              <div className={styles.statLabel}>Account Created</div>
-            </div>
-            <div className={styles.statCard}>
-              <div className={styles.statValue}>{getRoleLabel(userRole)}</div>
-              <div className={styles.statLabel}>Current Role</div>
-            </div>
+          <div className={styles.cardTitle}>
+            <Lock size={20} className={styles.cardTitleIcon} />
+            <h3>Security & Account</h3>
+          </div>
+          <div className={styles.actionList}>
+            <button className={styles.actionButton}>
+              <Lock size={18} />
+              Change Password
+            </button>
+            <button className={styles.actionButtonLogout} onClick={handleLogout}>
+              <LogOut size={18} />
+              Logout
+            </button>
           </div>
         </div>
       </div>
